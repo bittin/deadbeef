@@ -657,6 +657,9 @@ enum ddb_sys_directory_t {
 #if (DDB_API_LEVEL >= 13)
     DDB_SYS_DIR_PLUGIN_RESOURCES = 7,
 #endif
+#if (DDB_API_LEVEL >= 18)
+    DDB_SYS_DIR_STATE = 8,
+#endif
 };
 
 // typecasting macros
@@ -879,7 +882,7 @@ typedef struct {
 
     // streamer access
     /// This function is unsafe, and has been deprecated in favor of @c streamer_get_playing_track_safe
-    DB_playItem_t *(*streamer_get_playing_track) (void) DEPRECATED_16;
+    DB_playItem_t *(*streamer_get_playing_track) (void) DEPRECATED_116;
     DB_playItem_t *(*streamer_get_streaming_track) (void);
     float (*streamer_get_playpos) (void);
     int (*streamer_ok_to_read) (int len);
@@ -1075,6 +1078,12 @@ typedef struct {
     DB_playItem_t * (*pl_item_alloc_init) (const char *fname, const char *decoder_id);
     void (*pl_item_ref) (DB_playItem_t *it);
     void (*pl_item_unref) (DB_playItem_t *it);
+
+    // Copy playlist item with metadata.
+    // NOTE: There's a behavior change from 1.9.6 to the next version:
+    // The older version was copying the previous/next pointers into the original linked lists (both main and search).
+    // This was required by some ancient version of deadbeef,
+    // but in the current one it causes a crash bug / data corruption under certain circumstances.
     void (*pl_item_copy) (DB_playItem_t *out, DB_playItem_t *in);
 
     // request lock for adding files to playlist
@@ -1779,7 +1788,14 @@ typedef struct {
     /// Register a plugin for async deinitialization.
     /// The deinit func will be called before unloading a plugin,
     /// and the caller will wait until completion block is performed.
-    void (*plug_register_for_async_deinit) (DB_plugin_t *plugin, void (*deinit_func)(void (^completion_block)(void)));
+    void (*plug_register_for_async_deinit) (DB_plugin_t *plugin, void (*deinit_func)(void (*completion_callback)(DB_plugin_t *plugin)));
+
+    /// Apply autosort to specified playlist, if it's enabled.
+    /// Every time a playlist is sorted via plt_sort or similar,
+    /// the chosen sort settings are saved in the playlist's metadata.
+    /// When plt_autosort is called, the playlist is re-sorted with those saved settings.
+    /// Usually it should be called by UI code, when appropriate.
+    void (*plt_autosort)(ddb_playlist_t *plt);
 #endif
 } DB_functions_t;
 

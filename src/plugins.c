@@ -100,7 +100,7 @@ typedef struct plugin_s {
     void *handle;
     char *filepath;
     DB_plugin_t *plugin;
-    void (*async_deinit)(void (^completion_block)(void));
+    void (*async_deinit)(void (*completion_callback)(DB_plugin_t *plugin));
     struct plugin_s *next;
 } plugin_t;
 
@@ -204,7 +204,7 @@ _register_for_undo (ddb_undo_hooks_t *hooks) {
 }
 
 static void
-_plug_register_for_async_deinit (DB_plugin_t *plugin, void (*deinit_func)(void (^completion_block)(void))) {
+_plug_register_for_async_deinit (DB_plugin_t *plugin, void (*deinit_func)(void (*completion_callback)(DB_plugin_t *plugin))) {
     for (plugin_t *p = plugins; p != NULL; p = p->next) {
         if (p->plugin == plugin) {
             p->async_deinit = deinit_func;
@@ -613,6 +613,7 @@ static DB_functions_t deadbeef_api = {
     .plt_load_from_buffer = (int (*) (ddb_playlist_t *plt, const uint8_t *buffer, size_t size))plt_load_from_buffer,
     .plt_save_to_buffer = (ssize_t (*) (ddb_playlist_t *plt, uint8_t **out_buffer))plt_save_to_buffer,
     .plug_register_for_async_deinit = _plug_register_for_async_deinit,
+    .plt_autosort = (void (*)(ddb_playlist_t *plt))plt_autosort,
 };
 
 DB_functions_t *deadbeef = &deadbeef_api;
@@ -659,6 +660,8 @@ plug_get_system_dir (int dir_id) {
         return dbcachedir;
     case DDB_SYS_DIR_PLUGIN_RESOURCES:
         return dbresourcedir;
+    case DDB_SYS_DIR_STATE:
+        return dbstatedir;
     }
     return NULL;
 }
@@ -1389,7 +1392,10 @@ static int _async_stop_count = 0;
 static void (^_async_stop_completion_block)(void);
 
 static void
-_handle_async_stop (void) {
+_handle_async_stop (DB_plugin_t *plugin) {
+    if (plugin != NULL) {
+        trace ("Stopped %s...\n", plugin->name);
+    }
     _async_stop_count -= 1;
     if (_async_stop_count == 0) {
         _plug_unload_stop_complete();
@@ -1458,13 +1464,10 @@ plug_unload_all (void(^completion_block)(void)) {
     for (plugin_t *p = plugins; p; p = p->next) {
         if (p->async_deinit != NULL) {
             _async_stop_count += 1;
-            p->async_deinit(^{
-                trace ("Stopped %s...\n", p->plugin->name);
-                _handle_async_stop();
-            });
+            p->async_deinit(_handle_async_stop);
         }
     }
-    _handle_async_stop();
+    _handle_async_stop(NULL);
 }
 
 void
@@ -1881,10 +1884,12 @@ void
 plug_register_in (DB_plugin_t *inplug) {
     int i;
     for (i = 0; g_plugins[i]; i++);
+    assert(i < MAX_PLUGINS);
     g_plugins[i++] = inplug;
     g_plugins[i] = NULL;
 
     for (i = 0; g_decoder_plugins[i]; i++);
+    assert(i < MAX_DECODER_PLUGINS);
     g_decoder_plugins[i++] = (DB_decoder_t *)inplug;
     g_decoder_plugins[i] = NULL;
 }
@@ -1894,10 +1899,12 @@ void
 plug_register_out (DB_plugin_t *outplug) {
     int i;
     for (i = 0; g_plugins[i]; i++);
+    assert(i < MAX_PLUGINS);
     g_plugins[i++] = outplug;
     g_plugins[i] = NULL;
 
     for (i = 0; g_output_plugins[i]; i++);
+    assert(i < MAX_OUTPUT_PLUGINS);
     g_output_plugins[i++] = (DB_output_t *)outplug;
     g_output_plugins[i] = NULL;
 }

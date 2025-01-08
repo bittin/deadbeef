@@ -1876,10 +1876,6 @@ pl_item_copy (playItem_t *out, playItem_t *it) {
     out->endsample64 = it->endsample64;
     out->shufflerating = it->shufflerating;
     out->_duration = it->_duration;
-    out->next[PL_MAIN] = it->next[PL_MAIN];
-    out->prev[PL_MAIN] = it->prev[PL_MAIN];
-    out->next[PL_SEARCH] = it->next[PL_SEARCH];
-    out->prev[PL_SEARCH] = it->prev[PL_SEARCH];
 
     for (DB_metaInfo_t *meta = it->meta; meta; meta = meta->next) {
         pl_add_meta_copy (out, meta);
@@ -2271,11 +2267,32 @@ plt_save(
                 if (exts && plug[i]->save) {
                     for (int e = 0; exts[e]; e++) {
                         if (!strcasecmp (exts[e], ext + 1)) {
+                            if (first == NULL) {
+                                first = plt_get_first(plt, PL_MAIN);
+                            }
+                            else {
+                                pl_item_ref(first);
+                            }
+                            if (last == NULL) {
+                                last = plt_get_last(plt, PL_MAIN);
+                            }
+                            else {
+                                pl_item_ref(last);
+                            }
+
                             int res = plug[i]->save (
-                                                     (ddb_playlist_t *)plt,
-                                                     fname,
-                                                     (DB_playItem_t *)_current_playlist->head[PL_MAIN],
-                                                     NULL);
+                                (ddb_playlist_t *)plt,
+                                fname,
+                                (DB_playItem_t *)first,
+                                (DB_playItem_t *)last);
+
+                            if (first != NULL) {
+                                pl_item_unref(first);
+                            }
+                            if (last != NULL) {
+                                pl_item_unref(last);
+                            }
+
                             UNLOCK;
                             return res;
                         }
@@ -2398,12 +2415,26 @@ pl_save_all (void) {
 }
 
 static int
-_plt_load_from_file (playlist_t *plt, ddb_file_handle_t *fp, playItem_t **last_added) {
+_interpret_relative_path(const char *dname, const char *uri, char *true_uri, size_t count) {
+    if (dname && is_relative_path (uri)) {
+        return snprintf (true_uri, count, "%s/%s", dname, uri);
+    } else {
+        return snprintf (true_uri, count, "%s", uri);
+    }
+}
+
+static int
+_plt_load_from_file (playlist_t *plt, const char *fname, ddb_file_handle_t *fp, playItem_t **last_added) {
     int result = -1;
     playItem_t *it = NULL;
     uint8_t majorver;
     uint8_t minorver;
     char magic[4];
+
+    char *dname = NULL;
+    char *true_uri = calloc(PATH_MAX, sizeof(char));
+    // must be allocated here to be unconditionally free() at the end of the function
+
     if (ddb_file_read (magic, 1, 4, fp) != 4) {
         //        trace ("failed to read magic\n");
         goto load_fail;
@@ -2430,7 +2461,12 @@ _plt_load_from_file (playlist_t *plt, ddb_file_handle_t *fp, playItem_t **last_a
     if (ddb_file_read (&cnt, 1, 4, fp) != 4) {
         goto load_fail;
     }
-    
+
+    char *slash = fname ? strrchr (fname, '/') : NULL;
+    if (slash) {
+        dname = strndup (fname, slash - fname);
+    }
+
     for (uint32_t i = 0; i < cnt; i++) {
         it = pl_item_alloc ();
         if (!it) {
@@ -2448,7 +2484,8 @@ _plt_load_from_file (playlist_t *plt, ddb_file_handle_t *fp, playItem_t **last_a
                 goto load_fail;
             }
             uri[l] = 0;
-            pl_add_meta (it, ":URI", uri);
+            _interpret_relative_path(dname, uri, true_uri, PATH_MAX);
+            pl_add_meta (it, ":URI", true_uri);
             // decoder
             uint8_t ll;
             if (ddb_file_read (&ll, 1, 1, fp) != 1) {
@@ -2594,7 +2631,12 @@ _plt_load_from_file (playlist_t *plt, ddb_file_handle_t *fp, playItem_t **last_a
                         // some values are stored twice:
                         // once in legacy format, and once in metadata format
                         // here, we delete what was set from legacy, and overwrite with metadata
-                        pl_replace_meta (it, key, value);
+                        if (strcmp (key, ":URI") != 0) {
+                            pl_replace_meta (it, key, value);
+                        } else {
+                            _interpret_relative_path(dname, value, true_uri, PATH_MAX);
+                            pl_replace_meta (it, key, true_uri);
+                        }
                     }
                 }
                 else {
@@ -2655,6 +2697,8 @@ load_fail:
         pl_item_unref (it);
         it = NULL;
     }
+    free (dname);
+    free (true_uri);
     return result;
 }
 
@@ -2739,7 +2783,7 @@ plt_load_int (
     ddb_file_handle_t fh;
     ddb_file_init_stdio(&fh, fp);
 
-    if (0 != _plt_load_from_file(plt, &fh, &last_added)) {
+    if (0 != _plt_load_from_file(plt, fname, &fh, &last_added)) {
         goto load_fail;
     }
 
@@ -2769,7 +2813,7 @@ plt_load_from_buffer (playlist_t *plt, const uint8_t *buffer, size_t size) {
     ddb_file_init_buffer(&fh, buffer, size);
 
     playItem_t *last_added = NULL;
-    int res = _plt_load_from_file(plt, &fh, &last_added);
+    int res = _plt_load_from_file(plt, NULL, &fh, &last_added);
     if (last_added) {
         pl_item_unref (last_added);
     }
@@ -3791,6 +3835,10 @@ void
 plt_move_all_items (playlist_t *to, playlist_t *from, playItem_t *insert_after) {
     LOCK;
     playItem_t *it = from->head[PL_MAIN];
+    if (it == NULL) {
+        UNLOCK;
+        return;
+    }
     pl_item_ref(it);
     ddb_undobuffer_group_begin (ddb_undomanager_get_buffer (ddb_undomanager_shared ()));
     while (it != NULL) {
