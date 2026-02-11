@@ -28,7 +28,6 @@
 #    include <config.h>
 #endif
 #include <assert.h>
-#include <dispatch/dispatch.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -89,13 +88,13 @@
 #include "playqueue.h"
 #include "tf.h"
 #include "logger.h"
+#include "metacache.h"
 
-#ifdef OSX_APPBUNDLE
-#    include "scriptable/scriptable.h"
-#    include "scriptable/scriptable_dsp.h"
-#    include "scriptable/scriptable_encoder.h"
-//#include "scriptable/scriptable_tfquery.h"
-#endif
+#include "scriptable/scriptable.h"
+#include "scriptable/scriptable_dsp.h"
+#include "scriptable/scriptable_encoder.h"
+
+#include "scriptable/scriptable_shared.h"
 
 #include "undo/undomanager.h"
 
@@ -151,7 +150,7 @@ print_help (void) {
     fprintf (stdout, _ ("   --prev             Previous song in playlist\n"));
     fprintf (stdout, _ ("   --random           Random song in playlist\n"));
     fprintf (stdout, _ ("   --queue            Append file(s) to existing playlist\n"));
-    fprintf (stdout, _ ("   --gui PLUGIN       Tells which GUI plugin to use, default is \"GTK2\"\n"));
+    fprintf (stdout, _ ("   --gui PLUGIN       Tells which GUI plugin to use, default is \"GTK3\"\n"));
     fprintf (stdout, _ ("   --nowplaying FMT   Print formatted track name to stdout\n"));
     fprintf (
         stdout,
@@ -685,8 +684,11 @@ server_start (void) {
 #else
     srv_socket = db_socket_set_unix (&srv_local, &len);
 #    ifndef USE_ABSTRACT_SOCKET_NAME
-    if (unlink (srv_local.sun_path) < 0) {
-        perror ("INFO: unlink socket");
+    {
+        struct stat st;
+        if (stat(srv_local.sun_path, &st) == 0 && unlink (srv_local.sun_path) < 0) {
+            perror ("INFO: unlink socket");
+        }
     }
     len = offsetof (struct sockaddr_un, sun_path) + (int)strlen (srv_local.sun_path);
 #    endif
@@ -839,7 +841,7 @@ save_resume_state (void) {
     int playtrack = -1;
     int playlist = -1;
     playlist_t *plt = pl_get_playlist (trk);
-    int paused = (output->state () == DDB_PLAYBACK_STATE_PAUSED);
+    int paused = (output->state () == DDB_PLAYBACK_STATE_PAUSED) || (conf_get_int ("resume_always_paused", 0));
     if (trk && plt) {
         playlist = plt_get_idx_of (plt);
         playtrack = plt_get_item_idx (plt, trk, PL_MAIN);
@@ -1055,6 +1057,36 @@ _touch (const char *path) {
 }
 #endif
 
+static void
+_async_exit_handler(void) {
+    // at this point we can simply do exit(0), but let's clean up for debugging
+    scriptableDeinitShared ();
+
+    pl_free (); // may access conf_*
+    ddb_undomanager_free(ddb_undomanager_shared());
+
+    conf_free ();
+
+    tf_deinit ();
+
+    trace ("messagepump_free\n");
+    messagepump_free ();
+    trace ("plug_cleanup\n");
+    plug_cleanup ();
+    trace ("logger_free\n");
+
+    metacache_deinit ();
+
+    trace ("💛💙\n");
+    ddb_logger_free ();
+
+    char crash_marker[PATH_MAX];
+    snprintf (crash_marker, sizeof (crash_marker), "%s/running", dbconfdir);
+    unlink (crash_marker);
+
+    exit (0);
+}
+
 void
 main_cleanup_and_quit (void) {
     // stop streaming and playback before unloading plugins
@@ -1101,33 +1133,7 @@ main_cleanup_and_quit (void) {
     // and query configuration in background
     // so unload everything 1st before final cleanup
     plug_disconnect_all ();
-    plug_unload_all (^{
-    // at this point we can simply do exit(0), but let's clean up for debugging
-#ifdef OSX_APPBUNDLE
-        scriptableDeinitShared ();
-#endif
-
-        pl_free (); // may access conf_*
-        ddb_undomanager_free(ddb_undomanager_shared());
-
-        conf_free ();
-
-        trace ("messagepump_free\n");
-        messagepump_free ();
-        trace ("plug_cleanup\n");
-        plug_cleanup ();
-        trace ("logger_free\n");
-
-        trace ("💛💙\n");
-        ddb_logger_free ();
-
-        char crash_marker[PATH_MAX];
-        snprintf (crash_marker, sizeof (crash_marker), "%s/running", dbconfdir);
-        unlink (crash_marker);
-
-        exit (0);
-    });
-
+    plug_unload_all (_async_exit_handler);
 }
 
 static void
@@ -1142,6 +1148,41 @@ mainloop_thread (void *ctx) {
     }
 
     return;
+}
+
+static int
+mkdir_recursive(const char *path) {
+    char *tmp = strdup(path);
+    if (tmp == NULL) {
+        return -1;
+    }
+
+    char *p = tmp;
+
+    do {
+        while (*p == '/') {
+            p++;
+        }
+
+        p = strchr(p, '/');
+
+        if (p != NULL) {
+            *p = '\0';
+        }
+
+        if (mkdir(tmp, 0755) != 0 && errno != EEXIST) {
+            free(tmp);
+            return -1;
+        }
+
+        if (p != NULL) {
+            *p = '/';
+        }
+
+    } while (p != NULL);
+
+    free(tmp);
+    return 0;
 }
 
 int
@@ -1289,7 +1330,7 @@ main (int argc, char *argv[]) {
             return -1;
         }
     }
-    mkdir (confdir, 0755);
+    (void)mkdir_recursive (confdir);
 
 #if __APPLE__
     char appcachepath[PATH_MAX];
@@ -1330,7 +1371,7 @@ main (int argc, char *argv[]) {
             trace_err ("fatal: cache path is too long: %s\n", dbruntimedir);
             return -1;
         }
-        mkdir (dbruntimedir, 0755);
+        (void)mkdir_recursive (dbruntimedir);
     }
     else {
         strcpy (dbruntimedir, dbconfdir);
@@ -1354,7 +1395,7 @@ main (int argc, char *argv[]) {
             return -1;
         }
 #endif
-        mkdir (dbplugindir, 0755);
+        (void)mkdir_recursive (dbplugindir);
     }
     else {
         if (snprintf (dbplugindir, sizeof (dbplugindir), "%s/deadbeef", LIBDIR) > (int)sizeof (dbplugindir)) {
@@ -1372,7 +1413,7 @@ main (int argc, char *argv[]) {
             return -1;
         }
 #endif
-        mkdir (dbresourcedir, 0755);
+        (void)mkdir_recursive (dbresourcedir);
     }
     else {
         strcpy (dbresourcedir, dbplugindir);
@@ -1416,10 +1457,6 @@ main (int argc, char *argv[]) {
 #if __APPLE__
     char statedir[PATH_MAX];
     cocoautil_get_application_support_path (statedir, sizeof (statedir));
-    mkdir(statedir, 0755);
-    char temp[PATH_MAX];
-    snprintf(temp, sizeof(temp), "%s/Deadbeef", statedir);
-    mkdir(temp, 0755);
     if (snprintf (dbstatedir, sizeof (dbstatedir), "%s/Deadbeef/State", statedir) > (int)sizeof (dbstatedir)) {
         trace_err ("fatal: state path is too long: %s\n", dbstatedir);
         return -1;
@@ -1427,24 +1464,19 @@ main (int argc, char *argv[]) {
 #else
     const char *xdg_state = getenv (STATEDIR);
     if (xdg_state != NULL) {
-        mkdir (xdg_state, 0755);
         if (snprintf (dbstatedir, sizeof (dbstatedir), "%s/deadbeef", xdg_state) > (int)sizeof (dbstatedir)) {
             trace_err ("fatal: state path is too long: %s\n", dbstatedir);
             return -1;
         }
     }
     else {
-        char temp[PATH_MAX];
-        snprintf(temp, sizeof(temp), "%s/.local/state", homedir);
-        mkdir (temp, 0755);
         if (snprintf (dbstatedir, sizeof (dbstatedir), "%s/.local/state/deadbeef", homedir) > (int)sizeof (dbstatedir)) {
             trace_err ("fatal: state path is too long: %s\n", dbstatedir);
             return -1;
         }
     }
 #endif
-    mkdir (dbstatedir, 0755);
-
+    (void)mkdir_recursive (dbstatedir);
 
     const char *plugname = "main";
     for (int i = 1; i < argc; i++) {
@@ -1494,7 +1526,7 @@ main (int argc, char *argv[]) {
     }
 #endif
 
-    mkdir (dbconfdir, 0755);
+    (void)mkdir_recursive (dbconfdir);
 
     int size = 0;
     char *cmdline = prepare_command_line (argc, argv, &size);
@@ -1580,6 +1612,8 @@ main (int argc, char *argv[]) {
     _touch (crash_marker);
 #endif
 
+    metacache_init ();
+    tf_init ();
     pl_init ();
     conf_init ();
     conf_load (); // required by some plugins at startup
@@ -1604,9 +1638,7 @@ main (int argc, char *argv[]) {
 
     messagepump_init (); // required to push messages while handling commandline
 
-#ifdef OSX_APPBUNDLE
-    scriptableInitShared ();
-#endif
+    scriptableInitShared (deadbeef);
     if (plug_load_all ()) { // required to add files to playlist from commandline
         exit (-1);
     }
@@ -1635,10 +1667,8 @@ main (int argc, char *argv[]) {
 
     free (cmdline);
 
-#ifdef OSX_APPBUNDLE
-    scriptableDspLoadPresets (scriptableRootShared ());
-    scriptableEncoderLoadPresets (scriptableRootShared ());
-#endif
+    scriptableDspLoadPresets (scriptableGetSharedRoot());
+    scriptableEncoderLoadPresets (scriptableGetSharedRoot());
 
     streamer_init ();
 

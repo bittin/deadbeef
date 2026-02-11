@@ -1,10 +1,19 @@
 #!/bin/bash
 
-./scripts/portable_postbuild.sh
+./scripts/portable_postbuild.sh $@
+
+DEBUG=false
+
+for arg in "$@"; do
+    if [[ "$arg" == "--debug" ]]; then
+        DEBUG=true
+        break
+    fi
+done
 
 # package for distribution
-VERSION=`cat PORTABLE_VERSION | perl -ne 'chomp and print'`
-BUILD=`cat PORTABLE_BUILD | perl -ne 'chomp and print'`
+VERSION=$(<"build_data/VERSION")
+BUILD=$(<"build_data/VERSION_SUFFIX")
 if [[ "$ARCH" == "i686" ]]; then
     echo arch: $ARCH
 elif [[ "$ARCH" == "x86_64" ]]; then
@@ -20,7 +29,11 @@ PLUGDIR=$SRCDIR/plugins
 LIBDIR=$SRCDIR/lib
 DOCDIR=$SRCDIR/doc
 PIXMAPDIR=$SRCDIR/pixmaps
-OUTNAME=deadbeef-static_${VERSION}-${BUILD}_${ARCH}.tar.bz2
+if ! $DEBUG; then
+    OUTNAME=deadbeef-static_${VERSION}-${BUILD}_${ARCH}.tar.bz2
+else
+    OUTNAME=deadbeef-static-debug_${VERSION}-${BUILD}_${ARCH}.tar.bz2
+fi
 
 mkdir -p portable_out/build
 rm portable_out/build/$OUTNAME
@@ -87,6 +100,8 @@ tar jcvf ../../portable_out/build/$OUTNAME\
     $PLUGDIR/ddb_soundtouch.so\
     $PLUGDIR/data68\
     $PLUGDIR/medialib.so\
+    $PLUGDIR/lyrics_gtk2.so\
+    $PLUGDIR/lyrics_gtk3.so\
     $PIXMAPDIR\
     $SRCDIR/locale\
     || exit 1

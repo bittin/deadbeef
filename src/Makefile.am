@@ -1,7 +1,9 @@
 bin_PROGRAMS = deadbeef
 
 deadbeef_SOURCES =\
+	actionhandlers.c actionhandlers.h\
 	buffered_file_writer.c buffered_file_writer.h\
+	coreplugin.c coreplugin.h\
 	conf.c  conf.h\
 	cueutil.c cueutil.h playlist.c playlist.h \
 	decodedblock.c decodedblock.h\
@@ -36,9 +38,10 @@ deadbeef_SOURCES =\
 	vfs.c vfs.h vfs_stdio.c\
 	volume.c volume.h\
 	viz.c viz.h\
-	undo/undo_playlist.c undo/undo_playlist.h
+	undo/undo_playlist.c undo/undo_playlist.h\
+	scriptable/scriptable_shared.c scriptable/scriptable_shared.h
 
-deadbeef_LDADD = $(LDADD) $(ICONV_LIB) $(DL_LIBS) -lm -lpthread $(DISPATCH_LIBS) $(LTLIBINTL) ../shared/libctmap.la ../shared/undo/libundo.la ../shared/filereader/libfilereader.la ../plugins/libparser/libparser.la
+deadbeef_LDADD = $(LDADD) $(ICONV_LIB) $(DL_LIBS) -lm -lpthread $(DISPATCH_LIBS) $(LTLIBINTL) ../shared/libctmap.la ../shared/undo/libundo.la ../shared/filereader/libfilereader.la ../shared/libparser.la ../shared/scriptable/libscriptable.la ../shared/libgrowablebuffer.la ../shared/libpluginsettings.la
 
 deadbeef_CFLAGS = $(DEPS_CFLAGS) $(DISPATCH_CFLAGS) -std=c99 -DLOCALEDIR=\"@localedir@\" -I@top_srcdir@/include -I@top_srcdir@/shared -I@top_srcdir@
 

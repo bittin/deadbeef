@@ -552,12 +552,8 @@ ddb_iconv (const char *cs_out, const char *cs_in, char *out, int outlen, const c
     // to utf8 branch
     if (!strcasecmp (cs_out, UTF8_STR)) {
         if (!strcasecmp (cs_in, UTF8_STR)) {
-            memcpy (out, in, inlen);
-            out[inlen] = 0;
-            int valid = u8_valid (out, inlen, NULL);
-            if (valid) {
-                len = inlen;
-            }
+            int result = u8_strnbcpy_size(out, in, inlen, outlen);
+            len = result;
         }
         else if (!strcasecmp (cs_in, "cp1251")) {
             len = cp1251_to_utf8 (in, inlen, out, outlen);
@@ -3609,7 +3605,7 @@ junklib_id3v2_sync_frame (const int version_major, uint8_t *data, const int sync
     char *writeptr = data;
     int written = 0;
     int consumed = 0;
-    while (written < synced_size) {
+    while (written < synced_size && consumed < synced_size) {
         *writeptr++ = *data;
         written++;
         if (data[0] == 0xff && synced_size-written >= 2 && data[1] == 0) {
@@ -4397,10 +4393,7 @@ junk_id3v2_read_full (playItem_t *it, DB_id3v2_tag_t *tag_store, DB_FILE *fp) {
                 err = -1;
                 goto error; // size of frame is more than size of tag
             }
-            if (sz < 1) {
-//                err = 1;
-                break; // frame must be at least 1 byte long
-            }
+
             uint8_t flags1 = readptr[0];
             uint8_t flags2 = readptr[1];
             readptr += 2;
@@ -4543,9 +4536,7 @@ junk_id3v2_read_full (playItem_t *it, DB_id3v2_tag_t *tag_store, DB_FILE *fp) {
             if (readptr - tag >= size - sz) {
                 break; // size of frame is less than size of tag
             }
-            if (sz < 1) {
-                break; // frame must be at least 1 byte long
-            }
+
             if (!strcmp (frameid, "PIC")) {
                 // don't attempt to parse APIC when we're not planning to use it
                 if (tag_store == NULL) {
@@ -4689,6 +4680,9 @@ junk_recode (const char *in, int inlen, char *out, int outlen, const char *cs) {
 
 int
 junk_rewrite_tags (playItem_t *it, uint32_t junk_flags, int id3v2_version, const char *id3v1_encoding) {
+    if (id3v2_version != 3 && id3v2_version != 4) {
+        trace ("junk_rewrite_tags: can't write id3v2 version %d\n", id3v2_version);
+    }
     trace ("junk_rewrite_tags %X\n", junk_flags);
     int err = -1;
     char *buffer = NULL;
@@ -4927,53 +4921,57 @@ junk_rewrite_tags (playItem_t *it, uint32_t junk_flags, int id3v2_version, const
                 }
             }
 
-            // frames which should not remap to TXXX
-            static const char *txxx_no_fallbacks[] = {
-                "comment",
-                "unsynced lyrics",
-                "track"
-                "numtracks"
-                "disc"
-                "numdiscs",
-                NULL
-            };
-
-            if (!noremap) {
-                if (mapidx >= 0) {
-                    for (int i = 0; txxx_no_fallbacks[i]; i++) {
-                        if (!strcasecmp (txxx_no_fallbacks[i], meta->key)) {
-                            noremap = 1;
-                            break;
-                        }
-                    }
-                }
-            }
-
             // is this a text frame that needs remapping to TXXX?
-            if (!noremap) {
+            if (!noremap && mapidx >= 0) {
                 if (!frame_mapping[mapidx+MAP_ID3V24] || frame_mapping[mapidx+MAP_ID3V24][0] != 'T') {
                     noremap = 1;
                 }
             }
 
+            if (!noremap && mapidx >= 0) {
+                // frames which should not remap to TXXX
+                static const char *txxx_no_fallbacks[] = {
+                    "comment",
+                    "unsynced lyrics",
+                    "track"
+                    "numtracks"
+                    "disc"
+                    "numdiscs",
+                    NULL
+                };
+
+                for (int i = 0; txxx_no_fallbacks[i]; i++) {
+                    if (!strcasecmp (txxx_no_fallbacks[i], meta->key)) {
+                        noremap = 1;
+                        break;
+                    }
+                }
+            }
+
             if (!noremap) {
                 // add as txxx
-                int out_size;
+                int out_size = 0;
+                int needs_free = 0;
+                const char *tag_value = NULL;
 
-                int needs_free;
-                const char *tag_value;
-                if (id3v2.version[0] == 4) {
+                if (id3v2_version == 4) {
                     tag_value = _get_combined_meta_value (meta, &out_size, "\0", 1, &needs_free);
                 }
-                else if (id3v2.version[0] == 3) {
+                else if (id3v2_version == 3) {
                     tag_value = _get_combined_meta_value (meta, &out_size, " / ", 3, &needs_free);
                 }
-                else {
-                    assert (0);
+
+                const char *key;
+                if (mapidx >= 0) {
+                    trace ("remapping unsupported text frame to TXXX %s=%s\n", key, tag_value);
+                    key = frame_mapping[mapidx];
+                } else {
+                    trace ("adding unknown/custom text frame as TXXX %s=%s\n", key, tag_value);
+                    key = meta->key;
                 }
-                trace ("adding unknown frame as TXX %s=%s\n", meta->key, tag_value);
-                junk_id3v2_remove_txxx_frame (&id3v2, meta->key);
-                junk_id3v2_add_txxx_frame (&id3v2, meta->key, tag_value, out_size);
+
+                junk_id3v2_remove_txxx_frame (&id3v2, key);
+                junk_id3v2_add_txxx_frame (&id3v2, key, tag_value, out_size);
                 if (needs_free) {
                     free ((char *)tag_value);
                 }
@@ -5106,22 +5104,30 @@ junk_rewrite_tags (playItem_t *it, uint32_t junk_flags, int id3v2_version, const
             if (strchr (":!_", meta->key[0])) {
                 break;
             }
+            const char *key = NULL;
             int i;
             for (i = 0; frame_mapping[i]; i += FRAME_MAPPINGS) {
-                if (!strcasecmp (meta->key, frame_mapping[i+MAP_DDB]) && frame_mapping[i+MAP_APEV2]) {
-                    trace ("apev2 appending known field: %s=%s\n", meta->key, meta->value);
-                    _apev2_append_combined_text_frame_from_meta (&apev2, frame_mapping[i+MAP_APEV2], meta);
+                if (!strcasecmp (meta->key, frame_mapping[i+MAP_DDB])) {
+                    if (frame_mapping[i+MAP_APEV2]) {
+                        trace ("apev2 appending known field: %s=%s\n", meta->key, meta->value);
+                        _apev2_append_combined_text_frame_from_meta (&apev2, frame_mapping[i+MAP_APEV2], meta);
+                    } else {
+                        key = frame_mapping[i];
+                    }
                     break;
                 }
             }
-            if (!frame_mapping[i]
+            if ((key != NULL || !frame_mapping[i])
                     && strcasecmp (meta->key, "track")
                     && strcasecmp (meta->key, "numtracks")
                     && strcasecmp (meta->key, "disc")
                     && strcasecmp (meta->key, "numdiscs")
                ) {
-                trace ("apev2 writing unknown field: %s=%s\n", meta->key, meta->value);
-                _apev2_append_combined_text_frame_from_meta (&apev2, meta->key, meta);
+                if (key == NULL) {
+                    key = meta->key;
+                }
+                trace ("apev2 writing unknown field: %s=%s\n", key, meta->value);
+                _apev2_append_combined_text_frame_from_meta (&apev2, key, meta);
             }
             meta = meta->next;
         }

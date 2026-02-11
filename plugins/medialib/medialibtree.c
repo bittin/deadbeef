@@ -56,7 +56,7 @@ _create_sorted_tree(
 
     ddb_tf_context_t ctx = {0};
     ctx._size = sizeof (ddb_tf_context_t);
-    ctx.flags = DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_NO_DYNAMIC;
+    ctx.flags = DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_NO_DYNAMIC | DDB_TF_CONTEXT_FAST_LOOKUP;
     ctx.plt = plt;
     ctx.iter = PL_MAIN;
 
@@ -157,9 +157,14 @@ _create_sorted_tree(
         }
 
         if (is_leaf) {
-            ddb_playItem_t *it = next;
-            next = deadbeef->pl_get_next(it, PL_MAIN);
-            deadbeef->pl_item_unref(it);
+            while (next != NULL) {
+                ddb_playItem_t *it = next;
+                next = deadbeef->pl_get_next(it, PL_MAIN);
+                deadbeef->pl_item_unref(it);
+                if (next == NULL || !selected || deadbeef->pl_is_selected(next)) {
+                    break;
+                }
+            }
         }
         else {
             // recurse into subgroups
@@ -175,7 +180,7 @@ _create_sorted_tree(
         char next_text[1000];
         ctx.it = next;
         deadbeef->tf_eval(&ctx, tfs[group_level], next_text, sizeof (next_text));
-        group_did_change = strcmp(group_text, next_text);
+        group_did_change = strcasecmp(group_text, next_text);
 
         if (group_did_change && level > 0) {
             break;
@@ -186,7 +191,7 @@ _create_sorted_tree(
 }
 
 static void
-_create_tf_tree(medialib_source_t *source, ml_tree_item_t *root, int selected, const char **tfs, int tfs_count) {
+_create_tf_tree(medialib_source_t *source, ml_tree_item_t *root, int selected, const char **tfs, int tfs_count, int needs_sort) {
     size_t tf_sort_size = 0;
 
     char **bcs = calloc (tfs_count, sizeof (char *));
@@ -219,7 +224,7 @@ _create_tf_tree(medialib_source_t *source, ml_tree_item_t *root, int selected, c
         bcs[i] = deadbeef->tf_compile(bc);
         free (bc);
 
-        tf_sort_size += strlen(tfs[i]);
+        tf_sort_size += strlen(tfs[i]) + 1;
     }
     tf_sort_size++;
 
@@ -229,10 +234,24 @@ _create_tf_tree(medialib_source_t *source, ml_tree_item_t *root, int selected, c
         size_t len = strlen(tfs[i]);
         memcpy(curr, tfs[i], len);
         curr += len;
+        *curr++ = '/';
     }
     *curr = 0;
 
-    deadbeef->plt_sort_v2(source->ml_playlist, PL_MAIN, -1, tf_sort, DDB_SORT_ASCENDING);
+    if (needs_sort) {
+        ddb_tf_context_t ctx = {
+            ._size = sizeof (ddb_tf_context_t),
+            .flags = DDB_TF_CONTEXT_NO_DYNAMIC | DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_FAST_LOOKUP | DDB_TF_FORCE_SORTABLE_TRACK_NUMBER,
+            .plt = source->ml_playlist,
+            .idx = -1,
+        };
+
+        char *tf_bytecode = deadbeef->tf_compile(tf_sort);
+
+        deadbeef->plt_sort_v3(&ctx, tf_bytecode, PL_MAIN, -1, DDB_SORT_ASCENDING);
+
+        deadbeef->tf_free(tf_bytecode);
+    }
 
     _create_sorted_tree(source->ml_playlist, root, selected, NULL, bcs, text_bcs, tfs_count, 0);
 
@@ -338,7 +357,7 @@ _create_sorted_folder_tree(ddb_playlist_t *plt, ml_tree_item_t *parent, int sele
 
     ddb_tf_context_t ctx = {0};
     ctx._size = sizeof (ddb_tf_context_t);
-    ctx.flags = DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_NO_DYNAMIC;
+    ctx.flags = DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_NO_DYNAMIC | DDB_TF_CONTEXT_FAST_LOOKUP;
     ctx.plt = plt;
     ctx.iter = PL_MAIN;
 
@@ -414,9 +433,14 @@ _create_sorted_folder_tree(ddb_playlist_t *plt, ml_tree_item_t *parent, int sele
         }
 
         if (is_leaf) {
-            ddb_playItem_t *it = next;
-            next = deadbeef->pl_get_next(it, PL_MAIN);
-            deadbeef->pl_item_unref(it);
+            while (next != NULL) {
+                ddb_playItem_t *it = next;
+                next = deadbeef->pl_get_next(it, PL_MAIN);
+                deadbeef->pl_item_unref(it);
+                if (next == NULL || !selected || deadbeef->pl_is_selected(next)) {
+                    break;
+                }
+            }
         }
         else {
             // recurse into subgroups
@@ -442,9 +466,22 @@ _create_sorted_folder_tree(ddb_playlist_t *plt, ml_tree_item_t *parent, int sele
 }
 
 static void
-_create_folder_tree(medialib_source_t *source, ml_tree_item_t *root, const char *track_tf, int selected) {
-    const char *sort_tf = "$directory_path(%path%)/[%album artist% - ]%album%/[%tracknumber%. ]%title%";
-    deadbeef->plt_sort_v2(source->ml_playlist, PL_MAIN, -1, sort_tf, DDB_SORT_ASCENDING);
+_create_folder_tree(medialib_source_t *source, ml_tree_item_t *root, const char *track_tf, int selected, int needs_sort) {
+    if (needs_sort) {
+        ddb_tf_context_t ctx = {
+            ._size = sizeof (ddb_tf_context_t),
+            .flags = DDB_TF_CONTEXT_NO_DYNAMIC | DDB_TF_CONTEXT_NO_MUTEX_LOCK | DDB_TF_CONTEXT_FAST_LOOKUP | DDB_TF_FORCE_SORTABLE_TRACK_NUMBER,
+            .plt = source->ml_playlist,
+            .idx = -1,
+        };
+
+        const char *tf_sort = "$directory_path(%path%)/[%album artist% - ]%album%/[%tracknumber%. ]%title%";
+        char *tf_bytecode = deadbeef->tf_compile(tf_sort);
+
+        deadbeef->plt_sort_v3(&ctx, tf_bytecode, PL_MAIN, -1, DDB_SORT_ASCENDING);
+
+        deadbeef->tf_free(tf_bytecode);
+    }
 
     char *track_tf_bc = deadbeef->tf_compile(track_tf);
 
@@ -521,9 +558,18 @@ _create_item_tree_from_collection(const char *filter, scriptableItem_t *preset, 
         return root;
     }
 
+    int needs_sort = 0;
+
     const char *tf = scriptableItemPropertyValueForKey(item, "name");
     if (!strcmp (tf, "%folder_tree%")) {
         const char *track_tf = NULL;
+
+        scriptableItem_t *compareItem = source->last_build_tree_preset != NULL ? scriptableItemChildren(source->last_build_tree_preset) : NULL;
+        needs_sort = compareItem == NULL || source->last_build_tree_playlist_modification_idx != source->playlist_modification_idx;
+        const char *compareTf = compareItem != NULL ? scriptableItemPropertyValueForKey(compareItem, "name") : NULL;
+        if (!needs_sort && (compareTf == NULL || strcmp (compareTf, tf))) {
+            needs_sort = 1;
+        }
 
         if (count < 2) {
             track_tf = "[%tracknumber%. ]%title%";
@@ -532,18 +578,44 @@ _create_item_tree_from_collection(const char *filter, scriptableItem_t *preset, 
             item = scriptableItemNext(item);
             track_tf = scriptableItemPropertyValueForKey(item, "name");
         }
-        _create_folder_tree(source, root, track_tf, selected);
+        _create_folder_tree(source, root, track_tf, selected, needs_sort);
     }
     else {
         const char **tfs = calloc(count, sizeof (char *));
-        tfs[0] = tf;
-        int index = 1;
-        while (index < count) {
-            item = scriptableItemNext(item);
-            tfs[index] = scriptableItemPropertyValueForKey(item, "name");
+
+        scriptableItem_t *compareItem = source->last_build_tree_preset != NULL ? scriptableItemChildren(source->last_build_tree_preset) : NULL;
+
+        needs_sort = compareItem == NULL || source->last_build_tree_playlist_modification_idx != source->playlist_modification_idx;
+        int index = 0;
+        do {
+            // First item already obtained
+            if (index > 0) {
+                tf = scriptableItemPropertyValueForKey(item, "name");
+            }
+
+            const char *compareTf = compareItem != NULL ? scriptableItemPropertyValueForKey(compareItem, "name") : NULL;
+            if (!needs_sort && (compareTf == NULL || strcmp (compareTf, tf))) {
+                needs_sort = 1;
+            }
+
+            tfs[index] = tf;
             index++;
+            item = scriptableItemNext(item);
+            if (!needs_sort && compareItem) {
+                compareItem = scriptableItemNext(compareItem);
+            }
+        } while (index < count);
+
+        _create_tf_tree(source, root, selected, tfs, count, needs_sort);
+        free (tfs);
+    }
+
+    if (needs_sort) {
+        if (source->last_build_tree_preset != NULL) {
+            scriptableItemFree(source->last_build_tree_preset);
         }
-        _create_tf_tree(source, root, selected, tfs, count);
+        source->last_build_tree_preset = scriptableItemClone(preset);
+        source->last_build_tree_playlist_modification_idx = source->playlist_modification_idx;
     }
 
     _assign_parents(root);

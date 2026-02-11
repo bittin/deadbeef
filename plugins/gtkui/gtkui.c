@@ -40,7 +40,7 @@
 #include <deadbeef/deadbeef.h>
 #include "../../gettext.h"
 #include "../hotkeys/hotkeys.h"
-#include "../libparser/parser.h"
+#include "../../shared/parser.h"
 #include "actionhandlers.h"
 #include "actions.h"
 #include "callbacks.h"
@@ -48,6 +48,7 @@
 #include "covermanager/covermanager.h"
 #include "ddbtabstrip.h"
 #include "drawing.h"
+#include "dspconfig.h"
 #include "eq.h"
 #include "gtkui.h"
 #include "gtkui_api.h"
@@ -70,6 +71,8 @@
 #include "selpropertieswidget.h"
 #include "undostack.h"
 #include "undointegration.h"
+#include "../../shared/scriptable/scriptable_dsp.h"
+#include "../../shared/scriptable/scriptable_encoder.h"
 
 #define USE_GTK_APPLICATION 1
 
@@ -161,10 +164,10 @@ gtkui_dispatch_on_main (void (^block) (void)) {
 static void
 format_timestr (char *buf, int sz, float time) {
     time = roundf (time);
-    int daystotal = (int)time / (3600 * 24);
-    int hourtotal = ((int)time / 3600) % 24;
-    int mintotal = ((int)time / 60) % 60;
-    int sectotal = ((int)time) % 60;
+    int daystotal = (int)(int64_t)time / (3600 * 24);
+    int hourtotal = (int)((int64_t)time / 3600) % 24;
+    int mintotal = (int)((int64_t)time / 60) % 60;
+    int sectotal = (int)((int64_t)time) % 60;
 
     if (daystotal == 0) {
         snprintf (buf, sz, "%d:%02d:%02d", hourtotal, mintotal, sectotal);
@@ -714,6 +717,12 @@ gtkui_on_configchanged (void *data) {
         GTK_CHECK_MENU_ITEM (lookup_widget (mainwin, "stop_after_current")),
         stop_after_current ? TRUE : FALSE);
 
+    // stop after queue
+    int stop_after_queue = deadbeef->conf_get_int ("playlist.stop_after_queue", 0);
+    gtk_check_menu_item_set_active (
+        GTK_CHECK_MENU_ITEM (lookup_widget (mainwin, "stop_after_queue")),
+        stop_after_queue ? TRUE : FALSE);
+
     // stop after current album
     int stop_after_album = deadbeef->conf_get_int ("playlist.stop_after_album", 0);
     gtk_check_menu_item_set_active (
@@ -1048,7 +1057,10 @@ gtkui_message (uint32_t id, uintptr_t ctx, uint32_t p1, uint32_t p2) {
         g_idle_add (add_mainmenu_actions_cb, NULL);
         break;
     case DB_EV_DSPCHAINCHANGED:
-        eq_refresh ();
+        gtkui_dispatch_on_main(^{
+            eq_refresh ();
+            dsp_setup_chain_changed ();
+        });
         break;
     }
     return 0;
@@ -1563,7 +1575,6 @@ gtkui_mainwin_init (void) {
         // check if any hotkeys were created manually (e.g. beta versions of 0.6)
         if (!deadbeef->conf_find ("hotkey.key", NULL)) {
             gtkui_set_default_hotkeys ();
-            gtkui_import_0_5_global_hotkeys ();
             DB_plugin_t *hkplug = deadbeef->plug_get_for_id ("hotkeys");
             if (hkplug) {
                 ((DB_hotkeys_plugin_t *)hkplug)->reset ();
@@ -2113,11 +2124,17 @@ static DB_plugin_action_t action_preferences = { .title = "Edit/Preferences",
                                                  .callback2 = action_preferences_handler,
                                                  .next = &action_toggle_designmode };
 
+static DB_plugin_action_t action_dsp_preferences = { .title = "Edit/DSP Preferences",
+                                                     .name = "dsp_preferences",
+                                                     .flags = DB_ACTION_COMMON,
+                                                     .callback2 = action_dsp_preferences_handler,
+                                                     .next = &action_preferences };
+
 static DB_plugin_action_t action_sort_custom = { .title = "Edit/Sort Custom",
                                                  .name = "sort_custom",
                                                  .flags = DB_ACTION_COMMON,
                                                  .callback2 = action_sort_custom_handler,
-                                                 .next = &action_preferences };
+                                                 .next = &action_dsp_preferences };
 
 static DB_plugin_action_t action_crop_selected = { .title = "Edit/Crop Selected",
                                                    .name = "crop_selected",
@@ -2235,12 +2252,16 @@ gtkui_get_actions (DB_playItem_t *it) {
 DB_plugin_t *
 ddb_gui_GTK2_load (DB_functions_t *api) {
     deadbeef = api;
+    scriptableDspInit(api);
+    scriptableEncoderInit(api);
     return DB_PLUGIN (&plugin);
 }
 #else
 DB_plugin_t *
 ddb_gui_GTK3_load (DB_functions_t *api) {
     deadbeef = api;
+    scriptableDspInit(api);
+    scriptableEncoderInit(api);
     return DB_PLUGIN (&plugin);
 }
 #endif
@@ -2394,4 +2415,7 @@ ddb_gtkui_t plugin = {
     .cut_selection = clipboard_cut_selection,
     .paste_selection = clipboard_paste_selection,
     .w_get_type_flags = w_get_type_flags,
+    .w_load_layout_from_conf_key = w_create_from_conf,
+    .w_save_layout_to_conf_key = w_save_to_conf,
+    .w_send_message = send_messages_to_widgets,
 };

@@ -68,7 +68,15 @@ static int grouptitleheight = 22;
     _pinnedGroupTitleView.hidden = YES;
     [self addSubview:_pinnedGroupTitleView];
 
+    // A bit of a hack: we can't control view/menu lifecycle,
+    // but here we hold references to some low level objects which we'd like to cleanup before quitting.
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(applicationWillQuit:) name:@"ApplicationWillQuit" object:nil];
+
     return self;
+}
+
+- (void)applicationWillQuit:(NSNotification *)notification {
+    [self freeGroups];
 }
 
 - (void)setDelegate:(id<DdbListviewDelegate>)delegate {
@@ -79,6 +87,7 @@ static int grouptitleheight = 22;
 - (void)cleanup
 {
     [self freeGroups];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)coverManagerDidReset {
@@ -193,19 +202,7 @@ static int grouptitleheight = 22;
         NSArray<DdbPlayItemPasteboardSerializer *> *draggedItems = [pboard readObjectsForClasses:classes options:options];
 
         for (DdbPlayItemPasteboardSerializer *holder in draggedItems) {
-            if (holder.plt == NULL) {
-                continue;
-            }
-
-            ddb_playItem_t **items;
-            ssize_t count = deadbeef->plt_get_items(holder.plt, &items);
-
-            [self.delegate dropPlayItems:(DdbListviewRow_t *)items before:row count:(int)count];
-
-            for (ssize_t i = 0; i < count; i++) {
-                deadbeef->pl_item_unref(items[i]);
-            }
-            free (items);
+            [self.delegate dropPlayItems:(DdbListviewRow_t *)holder.items before:row count:(int)holder.count];
         }
     }
     else if ([pboard.types containsObject:NSFilenamesPboardType]) {
@@ -342,6 +339,19 @@ static int grouptitleheight = 22;
     if ([self.delegate respondsToSelector:@selector(scrollChanged:)]) {
         [self.delegate scrollChanged:scrollPos];
     }
+
+    if (self.delegate.pinGroups) {
+        for (DdbListviewCol_t col = (self.delegate).firstColumn;
+             col != (self.delegate).invalidColumn;
+             col = [self.delegate nextColumn:col]) {
+
+            if ([self.delegate isAlbumArtColumn:col]) {
+                // Trigger full redraw, because album art can move with pinned group title when scrolling
+                self.needsDisplay = YES;
+                break;
+            }
+        }
+    }
 }
 
 - (void)setFrameSize:(NSSize)newSize {
@@ -451,20 +461,12 @@ static int grouptitleheight = 22;
 
         // draw album art
         int grp_next_y = grp_y + grp->height;
-        [self renderAlbumArtForGroup:grp groupIndex:groupIndex isPinnedGroup:NO nextGroupCoord:grp_next_y yPos:grp_y + title_height viewportY:dirtyRect.origin.y clipRegion:dirtyRect];
+        [self renderAlbumArtForGroup:grp groupIndex:groupIndex isPinnedGroup:(self.pinnedGroupTitleView.group == grp) nextGroupCoord:grp_next_y yPos:grp_y + title_height viewportY:self.enclosingScrollView.documentVisibleRect.origin.y clipRegion:dirtyRect];
 
         idx += grp->num_items;
         grp_y += grp->height;
         groupIndex += 1;
     }
-
-//    if (pin_grp) {
-//        self.pinnedGroupTitleView.hidden = NO;
-//    }
-//    else {
-//        self.pinnedGroupTitleView.hidden = NO;
-//    }
-//        [self drawGroupTitle:pin_grp grp_y:pinnedGrpPos title_height:title_height];
 
     if (cursor_it != (self.dataModel).invalidRow) {
         [self.dataModel unrefRow:cursor_it];

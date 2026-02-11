@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 set -x
-VERSION=`cat PORTABLE_VERSION | perl -ne 'chomp and print'`
+VERSION=$(<"build_data/VERSION")
 OSTYPE=`uname -s`
 if [[ "$ARCH" == "i686" ]]; then
     echo arch: $ARCH
@@ -11,6 +11,16 @@ else
     echo unknown arch $ARCH
     exit -1
 fi
+
+DEBUG=false
+
+for arg in "$@"; do
+    if [[ "$arg" == "--debug" ]]; then
+        DEBUG=true
+        break
+    fi
+done
+
 OUTDIR=portable/$ARCH/deadbeef-$VERSION
 PLUGDIR=$OUTDIR/plugins
 DOCDIR=$OUTDIR/doc
@@ -25,7 +35,7 @@ mkdir -p $PIXMAPDIR
 
 cp src/deadbeef $OUTDIR
 
-for i in converter pltbrowser shellexecui ; do
+for i in converter pltbrowser shellexecui lyrics ; do
     if [ -f ./plugins/$i/.libs/${i}_gtk2.so ]; then
         cp ./plugins/$i/.libs/${i}_gtk2.so $PLUGDIR/
     else
@@ -113,8 +123,10 @@ for i in po/*.gmo ; do
     cp $i $OUTDIR/locale/$base/LC_MESSAGES/deadbeef.mo
 done
 
+if ! $DEBUG; then
 # strip
-if [ $OSTYPE != 'Darwin' ];then
-    strip --strip-unneeded $OUTDIR/deadbeef
-    for i in $PLUGDIR/*.so ; do strip --strip-unneeded $i ; done
+    if [ $OSTYPE != 'Darwin' ];then
+        strip --strip-unneeded $OUTDIR/deadbeef
+        for i in $PLUGDIR/*.so ; do strip --strip-unneeded $i ; done
+    fi
 fi

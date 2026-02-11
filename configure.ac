@@ -1,5 +1,8 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([deadbeef], [devel])
+
+m4_include([build_data/version.m4])
+
+AC_INIT([deadbeef], DEADBEEF_VERSION)
 
 AC_CONFIG_HEADER(config.h)
 
@@ -111,6 +114,7 @@ AC_ARG_ENABLE(wavpack,  [AS_HELP_STRING([--disable-wavpack ], [disable wavpack p
 AC_ARG_ENABLE(cdda,     [AS_HELP_STRING([--disable-cdda    ], [disable CD-Audio plugin (default: enabled)])], [enable_cdda=$enableval], [enable_cdda=yes])
 AC_ARG_ENABLE(cdda-paranoia,     [AS_HELP_STRING([--disable-cdda-paranoia    ], [disable CD-Audio error correction during ripping (default: enabled)])], [enable_cdda_paranoia=$enableval], [enable_cdda_paranoia=yes])
 AC_ARG_ENABLE(gme,      [AS_HELP_STRING([--disable-gme     ], [disable Game Music Emu plugin for NSF, AY, etc (default: enabled)])], [enable_gme=$enableval], [enable_gme=yes])
+AC_ARG_ENABLE(lyrics, [AS_HELP_STRING([--enable-lyrics      ], [build lyrics viewer gui plugin (default: auto)])], [enable_lyrics=$enableval], [enable_lyrics=yes])
 AC_ARG_ENABLE(notify,   [AS_HELP_STRING([--disable-notify  ], [disable notification-daemon support plugin (default: enabled)])], [enable_notify=$enableval], [enable_notify=yes])
 AC_ARG_ENABLE(shellexec, [AS_HELP_STRING([--disable-shellexec], [disable shell commands plugin (default: enabled)])], [enable_shellexec=$enableval], [enable_shellexec=yes])
 AC_ARG_ENABLE(musepack, [AS_HELP_STRING([--disable-musepack], [disable musepack plugin (default: enabled)])], [enable_musepack=$enableval], [enable_musepack=yes])
@@ -136,7 +140,6 @@ AC_ARG_ENABLE(wma, [AS_HELP_STRING([--enable-wma      ], [build WMA plugin (defa
 AC_ARG_ENABLE(pltbrowser, [AS_HELP_STRING([--enable-pltbrowser      ], [build playlist browser gui plugin (default: auto)])], [enable_pltbrowser=$enableval], [enable_pltbrowser=yes])
 AC_ARG_ENABLE(sc68, [AS_HELP_STRING([--enable-sc68     ], [build sc68 Atari ST and Amiga music player (default: auto)])], [enable_sc68=$enableval], [enable_sc68=yes])
 AC_ARG_ENABLE(abstract_socket, [AS_HELP_STRING([--enable-abstract-socket      ], [use abstract UNIX socket for IPC (default: disabled)])], [enable_abstract_socket=$enableval], [enable_abstract_socket=no])
-dnl AC_ARG_ENABLE(statusnotifier, [AS_HELP_STRING([--enable-statusnotifier], [KDE status notifier plugin for tray icon (default: disabled)])], [enable_statusnotifier=$enableval], [enable_statusnotifier=no])
 AC_ARG_ENABLE(rgscanner, [AS_HELP_STRING([--disable-rgscanner], [build ReplayGain scanner plugin (default: enabled)])], [enable_rgscanner=$enableval], [enable_rgscanner=yes])
 AC_ARG_ENABLE(soundtouch,   [AS_HELP_STRING([--disable-soundtouch  ], [disable soundtouch plugin (default: enabled)])], [enable_soundtouch=$enableval], [enable_soundtouch=yes])
 
@@ -216,7 +219,7 @@ CFLAGS="$CFLAGS $INSANE_CFLAGS -D_GNU_SOURCE $CFLAGS_EXTENSIONS $PREFIXFLAGS -DD
 AS_IF([test "${enable_staticlink}" != "no"], [
     HAVE_ZLIB=yes
     ZLIB_CFLAGS="-I../../$LIB/include"
-    ZLIB_LIBS="../../$LIB/lib/libz.a"
+    ZLIB_LIBS="-lz"
     AC_SUBST(ZLIB_CFLAGS)
     AC_SUBST(ZLIB_LIBS)
 ], [
@@ -228,7 +231,7 @@ AS_IF([test "${enable_staticlink}" != "no"], [
 AS_IF([test "${enable_staticlink}" != "no"], [
     HAVE_ZIP=yes
     ZIP_CFLAGS="-I../../$LIB/include"
-    ZIP_LIBS="../../$LIB/lib/libzip.a ../../$LIB/lib/libz.a"
+    ZIP_LIBS="-lzip -lz"
     AC_SUBST(ZIP_CFLAGS)
     AC_SUBST(ZIP_LIBS)
 ], [
@@ -252,7 +255,7 @@ AS_IF([test "${enable_gtk3}" = "yes"], [
 AM_CONDITIONAL(OS_OSX, test "x$OS_OSX" = "xyes")
 
 
-AS_IF([test "${enable_gtk2}" = "yes" -o "${enable_gtk3}" = "yes" -o "${enable_shellexec}" = "yes"], [
+AS_IF([test "${enable_gtk2}" = "yes" -o "${enable_gtk3}" = "yes" -o "${enable_shellexec}" = "yes" -o "${enable_medialib}" = "yes"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         JANSSON_CFLAGS="-I../../$LIB/include"
         JANSSON_LIBS=-ljansson
@@ -267,6 +270,16 @@ AS_IF([test "${enable_staticlink}" != "no"], [
     ], [
     AC_CHECK_LIB([dispatch], [main], [HAVE_DISPATCH=yes])
 ])
+
+AS_CASE([$host_os],
+ [darwin*], [
+    AC_MSG_NOTICE([Skipping libdispatch check on macOS])
+  ],
+  [
+    AC_CHECK_LIB([dispatch], [main], [], [
+      AC_MSG_ERROR([libdispatch not found. Please install libdispatch.])
+    ])
+  ])
 DISPATCH_CFLAGS=-fblocks
 DISPATCH_LIBS="-ldispatch -lBlocksRuntime"
 AC_SUBST(DISPATCH_CFLAGS)
@@ -314,7 +327,7 @@ AC_SUBST(COREAUDIO_LIBS)
 AS_IF([test "${enable_ffmpeg}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         FFMPEG_DEPS_CFLAGS="-I../../$LIB/include"
-        FFMPEG_DEPS_LIBS="../../$LIB/lib/libavcodec.a -lpthread ../../$LIB/lib/libavformat.a ../../$LIB/lib/libavcodec.a ../../$LIB/lib/libavutil.a -lm ../../$LIB/lib/libz.a ../../$LIB/lib/libopencore-amrnb.a ../../$LIB/lib/libopencore-amrwb.a ../../$LIB/lib/libopus.a"
+        FFMPEG_DEPS_LIBS="-lavcodec -lpthread -lavformat -lavcodec -lavutil -lz -lopencore-amrnb -lopencore-amrwb -lopus -lm"
         AC_SUBST(FFMPEG_DEPS_CFLAGS)
         AC_SUBST(FFMPEG_DEPS_LIBS)
         HAVE_FFMPEG=yes
@@ -325,7 +338,7 @@ AS_IF([test "${enable_ffmpeg}" != "no"], [
 
 AS_IF([test "${enable_staticlink}" != "no"], [
     HAVE_DBUS=yes
-    DBUS_DEPS_LIBS="../../$LIB/lib/libdbus-1.a ../../$LIB/lib/libexpat.a -lrt"
+    DBUS_DEPS_LIBS="-ldbus-1 -lexpat -lrt"
     DBUS_DEPS_CFLAGS="-I../../$LIB/include/dbus-1.0 -I../../$LIB/lib/dbus-1.0/include/"
     AC_SUBST(DBUS_DEPS_LIBS)
 ], [
@@ -374,10 +387,15 @@ AS_IF([test "${HAVE_SSE2}"], [
     AC_DEFINE(HAVE_SSE2,1,[Support SSE2 instructions])
 ])
 
+AX_CHECK_COMPILER_FLAGS(-msse3, HAVE_SSE3=1, [], -Werror)
+AS_IF([test "${HAVE_SSE3}"], [
+    AC_DEFINE(HAVE_SSE3,1,[Support SSE3 instructions])
+])
+
 dnl curl lib
 AS_IF([test "${enable_staticlink}" != "no"], [
     HAVE_CURL=yes
-    CURL_LIBS="-lpthread -lrt -lcurl  ../../$LIB/lib/libz.a"
+    CURL_LIBS="-lpthread -lrt -lcurl -lz"
     CURL_CFLAGS="-I../../$LIB/include"
     AC_SUBST(CURL_LIBS)
     AC_SUBST(CURL_CFLAGS)
@@ -394,12 +412,12 @@ AS_IF([test "${enable_mp3}" != "no"], [
         HAVE_MP3=yes
         HAVE_LIBMAD=yes
         MAD_CFLAGS="-I../../$LIB/include"
-        MAD_LIBS="../../$LIB/lib/libmad.a"
+        MAD_LIBS="-lmad"
         AC_SUBST(MAD_CFLAGS)
         AC_SUBST(MAD_LIBS)
         HAVE_LIBMPG123=yes
         MPG123_CFLAGS="-I../../$LIB/include"
-        MPG123_LIBS="../../$LIB/lib/libmpg123.a"
+        MPG123_LIBS="-lmpg123"
         AC_SUBST(MPG123_CFLAGS)
         AC_SUBST(MPG123_LIBS)
     ], [
@@ -429,7 +447,7 @@ dnl vorbis plugin
 AS_IF([test "${enable_vorbis}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_VORBISPLUGIN=yes
-        VORBIS_LIBS="-lvorbisfile -lvorbis -lm -logg"
+        VORBIS_LIBS="-lvorbisfile -lvorbis -logg -lm"
         VORBIS_CFLAGS="-I../../$LIB/include"
         AC_SUBST(VORBIS_LIBS)
         AC_SUBST(VORBIS_CFLAGS)
@@ -448,7 +466,7 @@ dnl opus plugin
 AS_IF([test "${enable_opus}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_OPUSPLUGIN=yes
-        OPUS_LIBS="-lopusfile -lopus -lm -logg"
+        OPUS_LIBS="-lopusfile -lopus -logg -lm"
         OPUS_CFLAGS="-I../../$LIB/include -I../../$LIB/include/opus"
         AC_SUBST(OPUS_LIBS)
         AC_SUBST(OPUS_CFLAGS)
@@ -464,7 +482,7 @@ AS_IF([test "${enable_opus}" != "no"], [
 dnl libogg for oggedit
 AS_IF([test "${enable_staticlink}" != "no"], [
     HAVE_OGG=yes
-    OGG_LIBS="-logg"
+    OGG_LIBS="-logg -lm"
     OGG_CFLAGS="-I../../$LIB/include"
     AC_SUBST(OGG_LIBS)
     AC_SUBST(OGG_CFLAGS)
@@ -483,7 +501,7 @@ AS_IF([test "${enable_flac}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_FLACPLUGIN=yes
         FLAC_CFLAGS="-I../../$LIB/include"
-        FLAC_LIBS="-lFLAC"
+        FLAC_LIBS="-lFLAC -lm"
         AC_SUBST(FLAC_CFLAGS)
         AC_SUBST(FLAC_LIBS)
     ], [
@@ -501,7 +519,7 @@ AS_IF([test "${enable_wavpack}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_WAVPACKPLUGIN=yes
         WAVPACK_CFLAGS="-I../../$LIB/include"
-        WAVPACK_LIBS="../../$LIB/lib/libwavpack.a"
+        WAVPACK_LIBS="-lwavpack -lm"
         AC_SUBST(WAVPACK_CFLAGS)
         AC_SUBST(WAVPACK_LIBS)
     ], [
@@ -519,7 +537,7 @@ AS_IF([test "${enable_sndfile}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_SNDFILEPLUGIN=yes
         SNDFILE_CFLAGS="-I../../$LIB/include"
-        SNDFILE_LIBS="../../$LIB/lib/libsndfile.a"
+        SNDFILE_LIBS="-lsndfile -lm"
         AC_SUBST(SNDFILE_CFLAGS)
         AC_SUBST(SNDFILE_LIBS)
     ], [
@@ -543,7 +561,7 @@ dnl cdda plugin
 AS_IF([test "${enable_cdda}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HAVE_CDDAPLUGIN=yes
-        CDDA_LIBS="../../$LIB/lib/libcdio.a ../../$LIB/lib/libcdio_cdda.a ../../$LIB/lib/libcdio_paranoia.a ../../$LIB/lib/libudf.a ../../$LIB/lib/libiso9660.a ../../$LIB/lib/libcddb.a"
+        CDDA_LIBS="-lcdio -lcdio_cdda  -lcdio_paranoia -ludf -liso9660 -lcddb"
         CDDA_CFLAGS="-I../../$LIB/include -DUSE_PARANOIA -DUSE_PARANOIA_10_2"
         AC_SUBST(CDDA_LIBS)
         AC_SUBST(CDDA_CFLAGS)
@@ -585,20 +603,15 @@ AS_IF([test "${enable_ffmpeg}" != "no"], [
 AS_IF([test "${enable_hotkeys}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         HOTKEYS_CFLAGS="-I../../$LIB/include"
-        HOTKEYS_LIBS="-lX11"
+        HOTKEYS_LIBS=""
         AC_SUBST(HOTKEYS_CFLAGS)
         AC_SUBST(HOTKEYS_LIBS)
         HAVE_HOTKEYS=yes
     ],
     [
-        AC_CHECK_HEADER([X11/Xlib.h], HAVE_XLIB_H=yes)
-        AS_IF([test "${HAVE_XLIB_H}" = "yes"], [
-            AS_IF([test "${HAVE_XLIB_H}" = "yes"], [
-                HOTKEYS_LIBS="-lX11"
-                AC_SUBST(HOTKEYS_LIBS)
-                HAVE_HOTKEYS=yes
-            ])
-        ])
+        HOTKEYS_LIBS=""
+        AC_SUBST(HOTKEYS_LIBS)
+        HAVE_HOTKEYS=yes
     ])
 ])
 
@@ -707,7 +720,7 @@ AS_IF([test "${enable_nullout}" != "no"], [
 AS_IF([test "${enable_src}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         LIBSAMPLERATE_DEPS_CFLAGS="-I../../$LIB/include"
-        LIBSAMPLERATE_DEPS_LIBS="../../$LIB/lib/libsamplerate.a -lpthread ${DL_LIBS}"
+        LIBSAMPLERATE_DEPS_LIBS="-lsamplerate -lpthread ${DL_LIBS}"
         AC_SUBST(LIBSAMPLERATE_DEPS_CFLAGS)
         AC_SUBST(LIBSAMPLERATE_DEPS_LIBS)
         HAVE_DSP_SRC=yes
@@ -767,7 +780,7 @@ AS_IF([test "${enable_dca}" != "no"], [
 AS_IF([test "${enable_aac}" != "no"], [
     AS_IF([test "${enable_staticlink}" != "no"], [
         FAAD2_CFLAGS="-I../../$LIB/include"
-        FAAD2_LIBS="../../$LIB/lib/libfaad.a"
+        FAAD2_LIBS="-lfaad -lm"
         AC_SUBST(FAAD2_CFLAGS)
         AC_SUBST(FAAD2_LIBS)
         HAVE_AAC=yes
@@ -801,6 +814,10 @@ AS_IF([test "${enable_converter}" != "no"], [
     AS_IF([test "${HAVE_GTK2}" = "yes" -o "${HAVE_GTK3}" = "yes"], [
         HAVE_CONVERTER=yes
     ])
+])
+
+AS_IF([test "${enable_lyrics}" != "no"], [
+    HAVE_LYRICS=yes
 ])
 
 AS_IF([test "${enable_medialib}" != "no"], [
@@ -839,19 +856,6 @@ AS_IF([test "${enable_sc68}" != "no" -a "${HAVE_ZLIB}" = "yes"], [
     HAVE_SC68=yes
 ])
 
-dnl AS_IF([test "${enable_statusnotifier}" != "no"], [
-dnl     echo "Checking statusnotifier deps..."
-dnl     AS_IF([test "${enable_staticlink}" != "no"], [
-dnl         HAVE_STATUSNOTIFIER=yes
-dnl         STATUSNOTIFIER_DEPS_CFLAGS="${GTK3_310_CFLAGS}"
-dnl         STATUSNOTIFIER_DEPS_LIBS="${GTK3_310_LIBS}"
-dnl         AC_SUBST(STATUSNOTIFIER_DEPS_CFLAGS)
-dnl         AC_SUBST(STATUSNOTIFIER_DEPS_LIBS)
-dnl     ], [
-dnl         PKG_CHECK_MODULES(STATUSNOTIFIER_DEPS, glib-2.0 >= 2.26 gio-2.0 gdk-pixbuf-2.0, HAVE_STATUSNOTIFIER=yes, HAVE_STATUSNOTIFIER=no)
-dnl     ])
-dnl ])
-
 AS_IF([test "${enable_rgscanner}" != "no"], [
     HAVE_RGSCANNER=yes
 ])
@@ -860,7 +864,7 @@ AS_IF([test "${enable_soundtouch}" != "no"], [
     HAVE_SOUNDTOUCH=yes
 ])
 
-PLUGINS_DIRS="plugins/liboggedit plugins/libparser plugins/lastfm plugins/mp3 plugins/vorbis plugins/opus plugins/flac plugins/wavpack plugins/sndfile plugins/vfs_curl plugins/cdda plugins/gtkui plugins/alsa plugins/ffmpeg plugins/hotkeys plugins/oss plugins/artwork plugins/adplug plugins/ffap plugins/sid plugins/nullout plugins/supereq plugins/vtx plugins/gme plugins/pulse plugins/notify plugins/musepack plugins/wildmidi plugins/tta plugins/dca plugins/aac plugins/mms plugins/shellexec plugins/shellexecui plugins/dsp_libsrc plugins/m3u plugins/vfs_zip plugins/converter plugins/dumb plugins/shn plugins/psf plugins/mono2stereo plugins/alac plugins/wma plugins/pltbrowser plugins/coreaudio plugins/sc68 plugins/rg_scanner plugins/soundtouch plugins/medialib"
+PLUGINS_DIRS="plugins/liboggedit plugins/lastfm plugins/mp3 plugins/vorbis plugins/opus plugins/flac plugins/wavpack plugins/sndfile plugins/vfs_curl plugins/cdda plugins/gtkui plugins/alsa plugins/ffmpeg plugins/hotkeys plugins/oss plugins/artwork plugins/adplug plugins/ffap plugins/sid plugins/nullout plugins/supereq plugins/vtx plugins/gme plugins/pulse plugins/notify plugins/musepack plugins/wildmidi plugins/tta plugins/dca plugins/aac plugins/mms plugins/shellexec plugins/shellexecui plugins/dsp_libsrc plugins/m3u plugins/vfs_zip plugins/converter plugins/dumb plugins/shn plugins/psf plugins/mono2stereo plugins/alac plugins/wma plugins/pltbrowser plugins/coreaudio plugins/sc68 plugins/rg_scanner plugins/soundtouch plugins/medialib plugins/lyrics"
 
 AM_CONDITIONAL(APE_USE_YASM, test "x$APE_USE_YASM" = "xyes")
 AM_CONDITIONAL(HAVE_VORBIS, test "x$HAVE_VORBISPLUGIN" = "xyes")
@@ -894,6 +898,7 @@ AM_CONDITIONAL(HAVE_HOTKEYS, test "x$HAVE_HOTKEYS" = "xyes")
 AM_CONDITIONAL(HAVE_MP3, test "x$HAVE_MP3" = "xyes")
 AM_CONDITIONAL(HAVE_LIBMAD, test "x$HAVE_LIBMAD" = "xyes")
 AM_CONDITIONAL(HAVE_LIBMPG123, test "x$HAVE_LIBMPG123" = "xyes")
+AM_CONDITIONAL(HAVE_LYRICS, test "x$HAVE_LYRICS" = "xyes")
 AM_CONDITIONAL(HAVE_OSS, test "x$HAVE_OSS" = "xyes")
 AM_CONDITIONAL(HAVE_SUPEREQ, test "x$HAVE_SUPEREQ" = "xyes")
 AM_CONDITIONAL(HAVE_NOTIFY, test "x$HAVE_NOTIFY" = "xyes")
@@ -926,7 +931,7 @@ AM_CONDITIONAL(PORTABLE, test "x$PORTABLE" = "xyes")
 AM_CONDITIONAL(PORTABLE_FULL, test "x$PORTABLE_FULL" = "xyes")
 AM_CONDITIONAL(USE_ABSTRACT_SOCKET_NAME, test "x$USE_ABSTRACT_SOCKET_NAME" = "xyes")
 AM_CONDITIONAL(HAVE_SSE2, test "${HAVE_SSE2}")
-dnl AM_CONDITIONAL(HAVE_STATUSNOTIFIER, test "x$HAVE_STATUSNOTIFIER" = "xyes")
+AM_CONDITIONAL(HAVE_SSE3, test "${HAVE_SSE3}")
 AM_CONDITIONAL(HAVE_RGSCANNER, test "x$HAVE_RGSCANNER" = "xyes")
 AM_CONDITIONAL(HAVE_SOUNDTOUCH, test "x$HAVE_SOUNDTOUCH" = "xyes")
 
@@ -947,7 +952,6 @@ external/ddb_output_pw/Makefile
 pixmaps/Makefile
 icons/Makefile
 plugins/liboggedit/Makefile
-plugins/libparser/Makefile
 plugins/gme/Makefile
 plugins/alsa/Makefile
 plugins/hotkeys/Makefile
@@ -996,9 +1000,11 @@ plugins/coreaudio/Makefile
 plugins/rg_scanner/Makefile
 plugins/soundtouch/Makefile
 plugins/medialib/Makefile
+plugins/lyrics/Makefile
 po/Makefile.in
 intl/Makefile
 deadbeef.desktop
+deadbeef_enqueue.desktop
 ])
 
 AC_OUTPUT
@@ -1045,6 +1051,7 @@ PRINT_PLUGIN_INFO([gtkui],[GTK2 user interface],[test "x$HAVE_GTK2" = "xyes"])
 PRINT_PLUGIN_INFO([hotkeys],[Local and global hotkeys support],[test "x$HAVE_HOTKEYS" = "xyes"])
 PRINT_PLUGIN_INFO([lastfm],[last.fm scrobbler],[test "x$HAVE_LASTFM" = "xyes"])
 PRINT_PLUGIN_INFO([libretro],[Libretro resampler plugin],[test "x$HAVE_LIBRETRO" = "xyes"])
+PRINT_PLUGIN_INFO([lyrics],[lyrics viewer gui plugin],[test "x$HAVE_LYRICS" = "xyes"])
 PRINT_PLUGIN_INFO([m3u],[M3U and PLS playlist support],[test "x$HAVE_M3U" = "xyes"])
 PRINT_PLUGIN_INFO([medialib],[Media library],[test "x$HAVE_MEDIALIB" = "xyes"])
 PRINT_PLUGIN_INFO([mms],[mms streaming support],[test "x$HAVE_MMS" = "xyes"])
@@ -1079,6 +1086,5 @@ PRINT_PLUGIN_INFO([vtx],[vtx file player (ay8910/12 emulation)],[test "x$HAVE_VT
 PRINT_PLUGIN_INFO([wavpack],[wavpack player],[test "x$HAVE_WAVPACKPLUGIN" = "xyes"])
 PRINT_PLUGIN_INFO([wildmidi],[WildMidi player plugin],[test "x$HAVE_WILDMIDI" = "xyes"])
 PRINT_PLUGIN_INFO([wma],[WMA plugin],[test "x$HAVE_WMA" = "xyes"])
-dnl PRINT_PLUGIN_INFO([statusnotifier],[plugin for KDE tray icon support],[test "x$HAVE_STATUSNOTIFIER" = "xyes"])
 
 echo

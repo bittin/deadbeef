@@ -46,7 +46,7 @@
 #include "search.h"
 #include "progress.h"
 #include "gtkui.h"
-#include "../libparser/parser.h"
+#include "../../shared/parser.h"
 #include "drawing.h"
 #include "eq.h"
 #include "undostack.h"
@@ -428,6 +428,14 @@ on_stop_after_current_activate (GtkMenuItem *menuitem, gpointer user_data) {
 }
 
 void
+on_stop_after_queue_activate (GtkMenuItem *menuitem, gpointer user_data) {
+    deadbeef->conf_set_int (
+        "playlist.stop_after_queue",
+        gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menuitem)));
+    deadbeef->sendmessage (DB_EV_CONFIGCHANGED, 0, 0, 0);
+}
+
+void
 on_stop_after_album_activate (GtkMenuItem *menuitem, gpointer user_data) {
     deadbeef->conf_set_int (
         "playlist.stop_after_album",
@@ -513,6 +521,12 @@ on_mainwin_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointe
     if (event->x >= c.x && event->x < c.x + c.width && event->y >= c.y && event->y < c.y + c.height) {
         if (event->type == GDK_2BUTTON_PRESS) {
             deadbeef->sendmessage (DB_EV_TRACKFOCUSCURRENT, 0, 0, 0);
+        }
+    } else if (event->type == GDK_BUTTON_PRESS){
+        if (event->button == 9 || event->button == 10) {
+            deadbeef->sendmessage (DB_EV_NEXT, 0, 0, 0);
+        } else if (event->button == 8) {
+            deadbeef->sendmessage (DB_EV_PREV, 0, 0, 0);
         }
     }
 

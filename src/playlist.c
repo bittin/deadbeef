@@ -181,6 +181,7 @@ pl_free (void) {
     _plt_loading = 1;
     while (_playlists_head) {
 
+#if _DEBUG
         for (playItem_t *it = _playlists_head->head[PL_MAIN]; it; it = it->next[PL_MAIN]) {
             if (it->_refc > 1) {
                 fprintf (
@@ -203,6 +204,7 @@ pl_free (void) {
                 _playlists_head->title,
                 _playlists_head->refc);
         }
+#endif
 
         plt_remove (0);
     }
@@ -1331,17 +1333,22 @@ _get_fullname_and_dir (
     int dirsz,
     DB_vfs_t *vfs,
     const char *dirname,
-    const char *d_name) {
-    char resolved_dirname[PATH_MAX];
-
-    char *res = realpath (dirname, resolved_dirname);
-    if (res) {
-        dirname = resolved_dirname;
+    const char *d_name
+) {
+    char *resolved_dirname = calloc(PATH_MAX, 1);
+    if (resolved_dirname != NULL) {
+        char *res = realpath (dirname, resolved_dirname);
+        if (res != NULL) {
+            dirname = resolved_dirname;
+        }
+    }
+    else {
+        trace ("WARNING: _get_fullname_and_dir: calloc(%d) returned NULL\n", (int)PATH_MAX);
     }
 
-    if (!vfs) {
+    if (vfs == NULL) {
         // prevent double-slashes
-        char *stripped_dirname = strdupa (dirname);
+        char *stripped_dirname = strdup (dirname);
         char *p = stripped_dirname + strlen (stripped_dirname) - 1;
         while (p > stripped_dirname && (*p == '/' || *p == '\\')) {
             p--;
@@ -1354,6 +1361,8 @@ _get_fullname_and_dir (
             *dir = 0;
             strncat (dir, stripped_dirname, dirsz - 1);
         }
+
+        free (stripped_dirname);
     }
     else {
         const char *sch = NULL;
@@ -1375,6 +1384,9 @@ _get_fullname_and_dir (
             }
         }
     }
+
+    free (resolved_dirname);
+    resolved_dirname = NULL;
 
 #ifdef __MINGW32__
     if (fullname && strchr (fullname, '\\')) {
@@ -1812,6 +1824,11 @@ pl_get_idx_of_iter (playItem_t *it, int iter) {
 playItem_t *
 plt_insert_item (playlist_t *playlist, playItem_t *after, playItem_t *it) {
     LOCK;
+    // Inserting the same pointer to multiple playlists is an error.
+    assert(it->next[PL_MAIN] == NULL);
+    assert(it->next[PL_SEARCH] == NULL);
+    assert(it->prev[PL_MAIN] == NULL);
+    assert(it->prev[PL_SEARCH] == NULL);
     undo_insert_items(ddb_undomanager_get_buffer(ddb_undomanager_shared()), playlist, &it, 1);
     pl_item_ref (it);
     if (!after) {
@@ -2424,7 +2441,7 @@ _interpret_relative_path(const char *dname, const char *uri, char *true_uri, siz
 }
 
 static int
-_plt_load_from_file (playlist_t *plt, const char *fname, ddb_file_handle_t *fp, playItem_t **last_added) {
+_plt_load_from_file (playlist_t *plt, const char *fname, ddb_file_handle_t *fp, playItem_t **last_added, int *pabort) {
     int result = -1;
     playItem_t *it = NULL;
     uint8_t majorver;
@@ -2469,7 +2486,7 @@ _plt_load_from_file (playlist_t *plt, const char *fname, ddb_file_handle_t *fp, 
 
     for (uint32_t i = 0; i < cnt; i++) {
         it = pl_item_alloc ();
-        if (!it) {
+        if (!it || (pabort != NULL && *pabort)) {
             goto load_fail;
         }
         uint16_t l;
@@ -2768,6 +2785,10 @@ plt_load_int (
                             plug[p]->load2 (visibility, (ddb_playlist_t *)plt, (DB_playItem_t *)after, fname, pabort);
                     }
                     plt->undo_enabled = undo_enabled;
+
+                    if (pabort != NULL && *pabort) {
+                        return NULL;
+                    }
                     return (playItem_t *)loaded_it;
                 }
             }
@@ -2783,7 +2804,7 @@ plt_load_int (
     ddb_file_handle_t fh;
     ddb_file_init_stdio(&fh, fp);
 
-    if (0 != _plt_load_from_file(plt, fname, &fh, &last_added)) {
+    if (0 != _plt_load_from_file(plt, fname, &fh, &last_added, pabort)) {
         goto load_fail;
     }
 
@@ -2813,7 +2834,7 @@ plt_load_from_buffer (playlist_t *plt, const uint8_t *buffer, size_t size) {
     ddb_file_init_buffer(&fh, buffer, size);
 
     playItem_t *last_added = NULL;
-    int res = _plt_load_from_file(plt, NULL, &fh, &last_added);
+    int res = _plt_load_from_file(plt, NULL, &fh, &last_added, NULL);
     if (last_added) {
         pl_item_unref (last_added);
     }
