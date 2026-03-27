@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DeaDBeeF Player\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-07 11:49+0100\n"
+"POT-Creation-Date: 2026-03-14 15:30+0100\n"
 "PO-Revision-Date: 2013-08-15 06:35+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010,2013-2014,2016\n"
 "Language-Team: Kazakh (http://app.transifex.com/deadbeef-player/deadbeef-player/language/kk/)\n"
@@ -36,12 +36,12 @@ msgstr "Бумалар құрылысын сақтау"
 #: ../plugins/converter/converter.glade.h:4
 #: ../plugins/converter/interface.c:128
 msgid "Copy if the format is not changing"
-msgstr ""
+msgstr "Пішім өзгермесе көшіру"
 
 #: ../plugins/converter/converter.glade.h:5
 #: ../plugins/converter/interface.c:132
 msgid "Re-tag after copy"
-msgstr ""
+msgstr "Көшіргеннен кейін тегтерді қайта қою"
 
 #: ../plugins/converter/converter.glade.h:6
 #: ../plugins/converter/interface.c:140
@@ -54,7 +54,7 @@ msgstr "Шығыс файл аты:"
 msgid ""
 "Extension (e.g. .mp3) will be appended automatically.\n"
 "Leave the field empty for default ([%tracknumber%. ][%artist% - ]%title%)."
-msgstr ""
+msgstr "Кеңейту (мысалы, .mp3) автоматты түрде қосылады.\nБастапқы мән үшін өрісті бос қалдырыңыз ([%tracknumber%. ][%artist% - ]%title%)."
 
 #: ../plugins/converter/converter.glade.h:10
 #: ../plugins/converter/interface.c:164
@@ -96,7 +96,7 @@ msgid ""
 "Skip\n"
 "Prompt\n"
 "Overwrite"
-msgstr ""
+msgstr "Өткізіп жіберу\nСұрау\nҮстінен жазу"
 
 #: ../plugins/converter/converter.glade.h:24
 #: ../plugins/converter/interface.c:402
@@ -158,7 +158,7 @@ msgid ""
 "Pipe\n"
 "Temp File\n"
 "Source File"
-msgstr ""
+msgstr "Түтік\nУақытша файл\nБастапқы файл"
 
 #: ../plugins/converter/converter.glade.h:40
 #: ../plugins/converter/interface.c:504
@@ -188,7 +188,7 @@ msgstr "ID3v2"
 #: ../plugins/converter/converter.glade.h:45
 #: ../plugins/converter/interface.c:544
 msgid "MP4"
-msgstr ""
+msgstr "MP4"
 
 #: ../plugins/converter/converter.glade.h:46
 #: ../plugins/converter/interface.c:550
@@ -291,7 +291,7 @@ msgstr "Кодтауыштың баптауын сақтау сәтсіз"
 msgid ""
 "Check preset folder permissions, try to pick different title, or free up "
 "some disk space"
-msgstr "Баптау сақталатын бума рұқсаттарын тексеріңіз, басқа атауды таңдаңыз не біршама диск кеңістігін босатыңыз."
+msgstr "Баптау сақталатын бума рұқсаттарын тексеріңіз, басқа атауды таңдаңыз не біршама диск кеңістігін босатыңыз"
 
 #: ../plugins/converter/convgui.c:971 ../plugins/converter/convgui.c:1542
 msgid "Preset with the same name already exists. Try to pick another title."
@@ -384,7 +384,7 @@ msgstr "32 биттік қалқымалы"
 
 #: ../plugins/converter/interface.c:249
 msgid "Skip"
-msgstr ""
+msgstr "Өткізіп жіберу"
 
 #: ../plugins/converter/interface.c:250
 msgid "Prompt"
@@ -400,11 +400,11 @@ msgstr "Pipe"
 
 #: ../plugins/converter/interface.c:486
 msgid "Temp File"
-msgstr ""
+msgstr "Уақытша файл"
 
 #: ../plugins/converter/interface.c:487
 msgid "Source File"
-msgstr ""
+msgstr "Бастапқы файл"
 
 #: ../plugins/converter/support.c:90 ../plugins/converter/support.c:114
 #: ../plugins/lyrics/support.c:90 ../plugins/lyrics/support.c:114
@@ -455,15 +455,15 @@ msgstr "DeaDBeeF аудармашылары"
 
 #: ../plugins/gtkui/covermanager/albumartwidget.c:391
 msgid "Playing Track"
-msgstr ""
+msgstr "Ойнатылып жатқан трек"
 
 #: ../plugins/gtkui/covermanager/albumartwidget.c:395
 msgid "Selected Track"
-msgstr ""
+msgstr "Таңдалған трек"
 
 #: ../plugins/gtkui/covermanager/albumartwidget.c:399
 msgid "Playing or Selected Track"
-msgstr ""
+msgstr "Ойнатылып жатқан немесе таңдалған трек"
 
 #: ../plugins/gtkui/ctmapping.c:130
 msgid "Content-Type"
@@ -622,7 +622,7 @@ msgstr "Дизайн режимі"
 
 #: ../plugins/gtkui/deadbeef.glade.h:32 ../plugins/gtkui/interface.c:329
 msgid "Log"
-msgstr ""
+msgstr "Журнал"
 
 #: ../plugins/gtkui/deadbeef.glade.h:33 ../plugins/gtkui/interface.c:333
 msgid "_Playback"
@@ -630,36 +630,36 @@ msgstr "О_йнату"
 
 #: ../plugins/gtkui/deadbeef.glade.h:34 ../plugins/gtkui/interface.c:340
 msgid "Shuffle"
-msgstr ""
+msgstr "Араластыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:35 ../plugins/gtkui/interface.c:347
 #: ../plugins/gtkui/interface.c:390
 msgid "Off"
-msgstr ""
+msgstr "Сөндірулі"
 
 #: ../plugins/gtkui/deadbeef.glade.h:36 ../plugins/gtkui/interface.c:353
 msgid "Tracks"
-msgstr ""
+msgstr "Тректер"
 
 #: ../plugins/gtkui/deadbeef.glade.h:37 ../plugins/gtkui/interface.c:359
 msgid "Albums"
-msgstr ""
+msgstr "Альбомдар"
 
 #: ../plugins/gtkui/deadbeef.glade.h:38 ../plugins/gtkui/interface.c:365
 msgid "Random Tracks"
-msgstr ""
+msgstr "Кездейсоқ тректер"
 
 #: ../plugins/gtkui/deadbeef.glade.h:39 ../plugins/gtkui/interface.c:371
 msgid "Repeat"
-msgstr ""
+msgstr "Қайталау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:40 ../plugins/gtkui/interface.c:378
 msgid "All Tracks"
-msgstr ""
+msgstr "Барлық тректер"
 
 #: ../plugins/gtkui/deadbeef.glade.h:41 ../plugins/gtkui/interface.c:384
 msgid "One Track"
-msgstr ""
+msgstr "Бір трек"
 
 #: ../plugins/gtkui/deadbeef.glade.h:42 ../plugins/gtkui/interface.c:396
 msgid "Scroll follows playback"
@@ -679,7 +679,7 @@ msgstr "Ағыдағы альбомнан кейін тоқтау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:46 ../plugins/gtkui/interface.c:413
 msgid "Stop after playback queue"
-msgstr ""
+msgstr "Ойнату кезегінен кейін тоқтату"
 
 #: ../plugins/gtkui/deadbeef.glade.h:47 ../plugins/gtkui/interface.c:422
 msgid "Jump to current track"
@@ -821,11 +821,11 @@ msgstr "Пішімі:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:77 ../plugins/gtkui/interface.c:1421
 msgid "Sort format:"
-msgstr ""
+msgstr "Сұрыптау пішімі:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:78 ../plugins/gtkui/interface.c:1430
 msgid "(if non-empty)"
-msgstr ""
+msgstr "(егер бос болмаса)"
 
 #: ../plugins/gtkui/deadbeef.glade.h:79 ../plugins/gtkui/interface.c:1438
 msgid "Alignment:"
@@ -836,7 +836,7 @@ msgid ""
 "Left\n"
 "Right\n"
 "Center"
-msgstr ""
+msgstr "Сол жақ\nОң жақ\nОртасы"
 
 #: ../plugins/gtkui/deadbeef.glade.h:83 ../plugins/gtkui/interface.c:1454
 #: ../plugins/gtkui/interface.c:5080
@@ -861,7 +861,7 @@ msgstr "16 биттік аудионы әрқашан 24 биттіке түрл
 
 #: ../plugins/gtkui/deadbeef.glade.h:88 ../plugins/gtkui/interface.c:1903
 msgid "Override bit depth:"
-msgstr ""
+msgstr "Биттік тереңдікті қайта анықтау:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:89
 msgid ""
@@ -871,27 +871,27 @@ msgid ""
 "24 bit\n"
 "32 bit\n"
 "32 bit float"
-msgstr ""
+msgstr "Сөндірулі\n8 бит\n16 бит\n24 бит\n32 бит\n32 бит (float)"
 
 #: ../plugins/gtkui/deadbeef.glade.h:95 ../plugins/gtkui/interface.c:1934
 msgid "Target samplerate:"
-msgstr ""
+msgstr "Мақсатты дискреттеу жиілігі:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:96 ../plugins/gtkui/interface.c:1967
 msgid "For multiples of 48KHz (96K, 192K, ...):"
-msgstr ""
+msgstr "48 кГц еселіктері үшін (96к, 192к, ...):"
 
 #: ../plugins/gtkui/deadbeef.glade.h:97 ../plugins/gtkui/interface.c:1986
 msgid "For multiples of 44.1KHz (88.2K, 176.4K, ...):"
-msgstr ""
+msgstr "44.1 кГц еселіктері үшін (88.2к, 176.4к, ...):"
 
 #: ../plugins/gtkui/deadbeef.glade.h:98 ../plugins/gtkui/interface.c:2001
 msgid "Based on input samplerate"
-msgstr ""
+msgstr "Кіріс дискреттеу жиілігіне негізделген"
 
 #: ../plugins/gtkui/deadbeef.glade.h:99 ../plugins/gtkui/interface.c:2005
 msgid "Override samplerate"
-msgstr ""
+msgstr "Дискреттеу жиілігін қайта анықтау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:100 ../plugins/gtkui/interface.c:2009
 msgid "Sound"
@@ -899,18 +899,18 @@ msgstr "Дыбыс"
 
 #: ../plugins/gtkui/deadbeef.glade.h:101 ../plugins/gtkui/interface.c:2036
 msgid "Source mode:"
-msgstr ""
+msgstr "Бастапқы режим:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:102
 msgid ""
 "By playback order\n"
 "Track\n"
 "Album"
-msgstr ""
+msgstr "Ойнату реті бойынша\nТрек\nАльбом"
 
 #: ../plugins/gtkui/deadbeef.glade.h:105 ../plugins/gtkui/interface.c:2053
 msgid "Processing:"
-msgstr ""
+msgstr "Өңдеу:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:106
 msgid ""
@@ -918,7 +918,7 @@ msgid ""
 "Apply gain\n"
 "Apply gain and prevent clipping according to peak\n"
 "Only prevent clipping"
-msgstr ""
+msgstr "Жоқ\nКүшейтуді қолдану\nКүшейтуді қолдану және пикке сәйкес клиппингті болдырмау\nТек клиппингті болдырмау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:110 ../plugins/gtkui/interface.c:2078
 #: ../plugins/gtkui/interface.c:2112
@@ -932,15 +932,15 @@ msgstr "+12 дБ"
 
 #: ../plugins/gtkui/deadbeef.glade.h:112 ../plugins/gtkui/interface.c:2092
 msgid "Preamp with RG info:"
-msgstr ""
+msgstr "RG ақпараты бар алдын ала күшейткіш:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:113 ../plugins/gtkui/interface.c:2099
 msgid "Preamp without RG info:"
-msgstr ""
+msgstr "RG ақпараты жоқ алдын ала күшейткіш:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:114 ../plugins/gtkui/interface.c:2126
 msgid "<b>ReplayGain</b>"
-msgstr ""
+msgstr "<b>ReplayGain</b>"
 
 #: ../plugins/gtkui/deadbeef.glade.h:115 ../plugins/gtkui/interface.c:2135
 msgid "Add files from command line (or file manager) to this playlist:"
@@ -952,7 +952,7 @@ msgstr "Қосылғанда, соңғы сессияны жалғастыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:117 ../plugins/gtkui/interface.c:2148
 msgid "Always resume session in paused state"
-msgstr ""
+msgstr "Сессияны әрқашан аялдатылған күйде жалғастыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:118 ../plugins/gtkui/interface.c:2152
 msgid "Don't add from archives when adding folders"
@@ -964,7 +964,7 @@ msgstr "\"Ағыдағы тректен кейін тоқтау\" опциясы
 
 #: ../plugins/gtkui/deadbeef.glade.h:120 ../plugins/gtkui/interface.c:2160
 msgid "\"Stop after queue\" option will switch off after triggering"
-msgstr ""
+msgstr "«Кезектен кейін тоқтату» опциясы іске қосылғаннан кейін сөнеді"
 
 #: ../plugins/gtkui/deadbeef.glade.h:121 ../plugins/gtkui/interface.c:2164
 msgid "\"Stop after current album\" option will switch off after triggering"
@@ -983,7 +983,7 @@ msgstr "DSP"
 
 #: ../plugins/gtkui/deadbeef.glade.h:124 ../plugins/gtkui/interface.c:2195
 msgid "Minimize to tray on startup"
-msgstr ""
+msgstr "Іске қосылғанда жүйелік сөреге жинау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:125 ../plugins/gtkui/interface.c:2199
 msgid "Close minimizes to tray"
@@ -995,7 +995,7 @@ msgstr "Жүйелік сөре таңбашасын жасыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:127 ../plugins/gtkui/interface.c:2207
 msgid "Delete from disk should use Trash"
-msgstr ""
+msgstr "Дискіден өшіру үшін қоқыс шелегі қолдану"
 
 #: ../plugins/gtkui/deadbeef.glade.h:128 ../plugins/gtkui/interface.c:2211
 msgid "Enable Japanese SHIFT-JIS detection and recoding"
@@ -1003,7 +1003,7 @@ msgstr "Japanese SHIFT-JIS анықтауды және қайта кодтауд
 
 #: ../plugins/gtkui/deadbeef.glade.h:129 ../plugins/gtkui/interface.c:2215
 msgid "Enable cyrillic CP1251 detection and recoding"
-msgstr ""
+msgstr "Кириллица CP1251 кодтауын анықтауды және қайта кодтауды іске қосу"
 
 #: ../plugins/gtkui/deadbeef.glade.h:130 ../plugins/gtkui/interface.c:2219
 msgid "Enable Chinese CP936 detection and recoding"
@@ -1027,7 +1027,7 @@ msgstr "GUI плагині (ауыстырылса, қайта қосу кере
 
 #: ../plugins/gtkui/deadbeef.glade.h:135 ../plugins/gtkui/interface.c:2277
 msgid "Display selection playback time in status bar"
-msgstr ""
+msgstr "Қалып-күй жолағында таңдалғанның ойнату уақытын көрсету"
 
 #: ../plugins/gtkui/deadbeef.glade.h:136 ../plugins/gtkui/interface.c:2281
 msgid "Player"
@@ -1035,19 +1035,19 @@ msgstr "Плеер"
 
 #. plugins/pltbrowser/pltbrowser.c
 #: ../plugins/gtkui/deadbeef.glade.h:137 ../plugins/gtkui/interface.c:2290
-#: ../translation/plugins.c:458
+#: ../translation/plugins.c:461
 #, no-c-format
 msgid "Close playlists with middle mouse button"
 msgstr "Ойнату тізімдерін тышқанның орта батырмасымен жабу"
 
 #: ../plugins/gtkui/deadbeef.glade.h:138 ../plugins/gtkui/interface.c:2294
 msgid "Hide \"Delete from Disk\" context menu item"
-msgstr ""
+msgstr "Контекстік мәзірден «Дискіден өшіру» тармағын жасыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:139 ../plugins/gtkui/interface.c:2298
 msgid ""
 "Switch to the next song when the currently played one is removed from disk"
-msgstr ""
+msgstr "Ойнатылып жатқан ән дискіден өшірілсе, келесі әнге ауысу"
 
 #: ../plugins/gtkui/deadbeef.glade.h:140 ../plugins/gtkui/interface.c:2302
 msgid "Auto-name playlists when adding a single folder"
@@ -1059,11 +1059,11 @@ msgstr "Бағандар өлшемдерін терезеге сыятында�
 
 #: ../plugins/gtkui/deadbeef.glade.h:142 ../plugins/gtkui/interface.c:2314
 msgid "Group spacing:"
-msgstr ""
+msgstr "Топ аралығы:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:143 ../plugins/gtkui/interface.c:2324
 msgid "pixels"
-msgstr ""
+msgstr "пиксель"
 
 #: ../plugins/gtkui/deadbeef.glade.h:144 ../plugins/gtkui/gtkui.c:1519
 #: ../plugins/gtkui/interface.c:2328 ../plugins/gtkui/interface.c:2773
@@ -1081,15 +1081,15 @@ msgstr "Алмастыру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:147 ../plugins/gtkui/interface.c:2356
 msgid "Bars"
-msgstr ""
+msgstr "Бағандар"
 
 #: ../plugins/gtkui/deadbeef.glade.h:148 ../plugins/gtkui/interface.c:2363
 msgid "Background (EQ)"
-msgstr ""
+msgstr "Фон (EQ)"
 
 #: ../plugins/gtkui/deadbeef.glade.h:149 ../plugins/gtkui/interface.c:2382
 msgid "Seekbar/Volumebar/EQ"
-msgstr ""
+msgstr "Өткізу жолағы/Дыбыс деңгейі жолағы/EQ"
 
 #: ../plugins/gtkui/deadbeef.glade.h:150 ../plugins/gtkui/interface.c:2407
 msgid "Base:"
@@ -1133,7 +1133,7 @@ msgstr "Таңдалған мәтін:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:159 ../plugins/gtkui/interface.c:2526
 msgid "Tab strip"
-msgstr ""
+msgstr "Беттер жолағы"
 
 #: ../plugins/gtkui/deadbeef.glade.h:160 ../plugins/gtkui/interface.c:2560
 msgid "Normal track(s):"
@@ -1183,19 +1183,19 @@ msgstr "<b>Фон:</b>"
 
 #: ../plugins/gtkui/deadbeef.glade.h:171 ../plugins/gtkui/interface.c:2725
 msgid "Override (loses GTK treeview theming, but speeds up rendering)"
-msgstr ""
+msgstr "Қайта анықтау (GTK treeview безендіруі жоғалады, бірақ рендеринг жылдамдайды)"
 
 #: ../plugins/gtkui/deadbeef.glade.h:172 ../plugins/gtkui/interface.c:2784
 msgid "Custom visualization base color"
-msgstr ""
+msgstr "Визуализацияның жеке негізгі түсі"
 
 #: ../plugins/gtkui/deadbeef.glade.h:173 ../plugins/gtkui/interface.c:2796
 msgid "Custom visualization background color"
-msgstr ""
+msgstr "Визуализацияның жеке фон түсі"
 
 #: ../plugins/gtkui/deadbeef.glade.h:174 ../plugins/gtkui/interface.c:2808
 msgid "Visualizations"
-msgstr ""
+msgstr "Визуализациялар"
 
 #: ../plugins/gtkui/deadbeef.glade.h:175 ../plugins/gtkui/interface.c:2812
 msgid "Appearance"
@@ -1203,15 +1203,15 @@ msgstr "Сыртқы түрі"
 
 #: ../plugins/gtkui/deadbeef.glade.h:176 ../plugins/gtkui/interface.c:2821
 msgid "Enable media library"
-msgstr ""
+msgstr "Медиатеканы іске қосу"
 
 #: ../plugins/gtkui/deadbeef.glade.h:177 ../plugins/gtkui/interface.c:2829
 msgid "Add / remove music folders"
-msgstr ""
+msgstr "Музыка бумаларын қосу / өшіру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:178 ../plugins/gtkui/interface.c:2871
 msgid "Media Library"
-msgstr ""
+msgstr "Медиатека"
 
 #: ../plugins/gtkui/deadbeef.glade.h:179 ../plugins/gtkui/interface.c:2880
 msgid "Enable Proxy Server"
@@ -1287,17 +1287,17 @@ msgstr "Ыстық пернелер"
 #: ../plugins/gtkui/deadbeef.glade.h:198 ../plugins/gtkui/interface.c:3145
 #: ../plugins/gtkui/interface.c:3199
 msgid "Configuration"
-msgstr ""
+msgstr "Конфигурация"
 
 #: ../plugins/gtkui/deadbeef.glade.h:199 ../plugins/gtkui/interface.c:3153
 #: ../plugins/gtkui/interface.c:3243
 msgid "Info"
-msgstr ""
+msgstr "Ақпарат"
 
 #: ../plugins/gtkui/deadbeef.glade.h:200 ../plugins/gtkui/interface.c:3160
 #: ../plugins/gtkui/interface.c:3259
 msgid "License"
-msgstr ""
+msgstr "Лицензия"
 
 #: ../plugins/gtkui/deadbeef.glade.h:201 ../plugins/gtkui/interface.c:3194
 #: ../plugins/gtkui/interface.c:4877
@@ -1306,7 +1306,7 @@ msgstr "Бастапқы мәндеріне тастау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:202 ../plugins/gtkui/interface.c:3211
 msgid "Version: "
-msgstr "Нұсқасы:"
+msgstr "Нұсқасы: "
 
 #: ../plugins/gtkui/deadbeef.glade.h:204 ../plugins/gtkui/interface.c:4035
 msgid "URL:"
@@ -1328,7 +1328,7 @@ msgstr "Қалайша сұрыптау ..."
 
 #: ../plugins/gtkui/deadbeef.glade.h:208 ../plugins/gtkui/interface.c:4307
 msgid "<b>Format</b>"
-msgstr ""
+msgstr "<b>Пішім</b>"
 
 #: ../plugins/gtkui/deadbeef.glade.h:209
 msgid ""
@@ -1370,7 +1370,7 @@ msgid "Strip APEv2"
 msgstr "APEv2 алып тастау"
 
 #: ../plugins/gtkui/deadbeef.glade.h:220 ../plugins/gtkui/interface.c:4553
-#: ../translation/plugins.c:545
+#: ../translation/plugins.c:548
 #, no-c-format
 msgid "ID3v2 version"
 msgstr "ID3v2 нұсқасы"
@@ -1436,7 +1436,7 @@ msgid ""
 " \"Add Location\" dialog. The title itself is visible in columns displaying "
 "the \"Artist\" metadata field. It should look like \"[custom] artist\" if "
 "the Artist field is present, or just \"custom\" otherwise."
-msgstr ""
+msgstr "Бұл сұхбат терезесі кез келген трек үшін жеке атауды орнатуға мүмкіндік береді. Бұл радиостанциялар үшін өте пайдалы. Жеке атауды орнату опциясы «Адресті қосу» сұхбат терезесінде де бар. Атаудың өзі «Орындаушы» метадеректер өрісін көрсететін бағандарда көрінеді. Егер Орындаушы өрісі болса, ол «[жеке] орындаушы» болып, әйтпесе тек «жеке» болып көрінуі керек."
 
 #: ../plugins/gtkui/deadbeef.glade.h:235 ../plugins/gtkui/interface.c:5325
 #: ../plugins/shellexecui/interface.c:70
@@ -1447,111 +1447,107 @@ msgstr "Түзету"
 
 #: ../plugins/gtkui/deadbeef.glade.h:236 ../plugins/gtkui/interface.c:5329
 msgid "Edit (in place)"
-msgstr ""
+msgstr "Түзету (орнында)"
 
 #: ../plugins/gtkui/deadbeef.glade.h:237 ../plugins/gtkui/interface.c:5341
 msgid "Add new field..."
-msgstr ""
+msgstr "Жаңа өріс қосу..."
 
 #: ../plugins/gtkui/deadbeef.glade.h:238 ../plugins/gtkui/interface.c:5390
 msgid "Edit Value"
-msgstr ""
+msgstr "Мәнді түзету"
 
 #: ../plugins/gtkui/deadbeef.glade.h:239 ../plugins/gtkui/interface.c:5403
 msgid "Field name:"
-msgstr ""
+msgstr "Өріс аты:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:240 ../plugins/gtkui/interface.c:5415
 msgid "Field value:"
-msgstr ""
+msgstr "Өріс мәні:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:241 ../plugins/gtkui/interface.c:5429
 #: ../plugins/gtkui/interface.c:5783
 msgid "Use ; character to separate multiple values."
-msgstr ""
+msgstr "Бірнеше мәнді ажырату үшін ; таңбасын қолданыңыз."
 
 #: ../plugins/gtkui/deadbeef.glade.h:242 ../plugins/gtkui/interface.c:5479
 msgid "DeaDBeeF Log"
-msgstr ""
+msgstr "DeaDBeeF журналы"
 
 #: ../plugins/gtkui/deadbeef.glade.h:243 ../plugins/gtkui/interface.c:5508
 msgid "Auto-open this window on errors"
-msgstr ""
+msgstr "Қателер кезінде бұл терезені автоматты түрде ашу"
 
 #: ../plugins/gtkui/deadbeef.glade.h:244 ../plugins/gtkui/interface.c:5512
 msgid "Clear"
-msgstr ""
+msgstr "Тазарту"
 
 #: ../plugins/gtkui/deadbeef.glade.h:245 ../plugins/gtkui/interface.c:5553
 msgid "ReplayGain Scan Progress"
-msgstr ""
+msgstr "ReplayGain сканерлеу барысы"
 
 #: ../plugins/gtkui/deadbeef.glade.h:246 ../plugins/gtkui/interface.c:5564
 msgid "Current File:"
-msgstr ""
+msgstr "Ағымдағы файл:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:247 ../plugins/gtkui/interface.c:5582
 #: ../plugins/gtkui/interface.c:5642 ../plugins/gtkui/rg.c:310
 msgid "Status"
-msgstr ""
+msgstr "Күй"
 
 #: ../plugins/gtkui/deadbeef.glade.h:248
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:67
 #: ../plugins/gtkui/interface.c:5589 ../plugins/gtkui/interface.c:5653
 msgid "Cancel"
-msgstr ""
+msgstr "Бас тарту"
 
 #: ../plugins/gtkui/deadbeef.glade.h:249 ../plugins/gtkui/interface.c:5621
 msgid "ReplayGain Scan Results"
-msgstr ""
+msgstr "ReplayGain сканерлеу нәтижелері"
 
 #: ../plugins/gtkui/deadbeef.glade.h:250 ../plugins/gtkui/interface.c:5649
 msgid "Update File Tags"
-msgstr ""
+msgstr "Файл тегтерін жаңарту"
 
 #: ../plugins/gtkui/deadbeef.glade.h:251 ../plugins/gtkui/interface.c:5680
 msgid "Copy report"
-msgstr ""
+msgstr "Есепті көшіру"
 
 #: ../plugins/gtkui/deadbeef.glade.h:252 ../plugins/gtkui/interface.c:5688
 msgid "Only show plugins with configuration"
-msgstr ""
+msgstr "Тек баптаулары бар плагиндерді көрсету"
 
 #: ../plugins/gtkui/deadbeef.glade.h:253 ../plugins/gtkui/interface.c:5729
 msgid "Edit Multiple Tracks"
-msgstr ""
+msgstr "Бірнеше тректі түзету"
 
 #: ../plugins/gtkui/deadbeef.glade.h:254 ../plugins/gtkui/interface.c:5741
 msgid "Field Name:"
-msgstr ""
+msgstr "Өріс аты:"
 
 #: ../plugins/gtkui/deadbeef.glade.h:255 ../plugins/gtkui/interface.c:5766
 msgid "Single Value"
-msgstr ""
+msgstr "Жалғыз мән"
 
 #: ../plugins/gtkui/deadbeef.glade.h:256 ../plugins/gtkui/interface.c:5779
 msgid "Individual Values"
-msgstr ""
+msgstr "Жеке мәндер"
 
-#: ../plugins/gtkui/dspconfig.c:77
-msgid "New preset"
-msgstr ""
+#: ../plugins/gtkui/dspconfig.c:77 ../plugins/gtkui/dspconfig.c:82
+msgid "New Preset"
+msgstr "Жаңа пресет"
 
 #: ../plugins/gtkui/dspconfig.c:80 ../plugins/gtkui/trkproperties.c:1233
 msgid "Name:"
 msgstr "Аты:"
 
-#: ../plugins/gtkui/dspconfig.c:82
-msgid "New Preset"
-msgstr ""
-
 #: ../plugins/gtkui/dspconfig.c:99
-msgid "Save as preset"
+msgid "Save as Preset"
 msgstr ""
 
 #: ../plugins/gtkui/dspconfig.c:196
 msgid "DSP Preset:"
-msgstr ""
+msgstr "DSP пресеті:"
 
 #: ../plugins/gtkui/eq.c:136
 msgid "Save DeaDBeeF EQ Preset"
@@ -1590,7 +1586,7 @@ msgid "Import Foobar2000 Preset"
 msgstr "Foobar2000 EQ баптауын импорттау"
 
 #. plugins/notify/notify.c
-#: ../plugins/gtkui/eq.c:311 ../translation/plugins.c:442
+#: ../plugins/gtkui/eq.c:311 ../translation/plugins.c:445
 #, no-c-format
 msgid "Enable"
 msgstr "Іске қосу"
@@ -1615,23 +1611,23 @@ msgstr "Жаңа ойнату тізімі"
 
 #: ../plugins/gtkui/fileman.c:106
 msgid "Add Folders"
-msgstr ""
+msgstr "Бумаларды қосу"
 
 #: ../plugins/gtkui/fileman.c:137
 #: ../plugins/gtkui/medialib/medialibwidget.c:518
 #: ../plugins/gtkui/playlist/mainplaylist.c:107
 #: ../plugins/gtkui/playlist/mainplaylist.c:138
 msgid "Add Files"
-msgstr ""
+msgstr "Файлдарды қосу"
 
 #: ../plugins/gtkui/fileman.c:215 ../translation/plugins.c:310
 #, no-c-format
 msgid "Add Location"
-msgstr ""
+msgstr "Адресті қосу"
 
 #: ../plugins/gtkui/fileman.c:368
 msgid "Drag & Drop"
-msgstr ""
+msgstr "Сүйреп апару"
 
 #: ../plugins/gtkui/fileman.c:412 ../plugins/gtkui/fileman.c:502
 msgid "Supported sound formats"
@@ -1643,11 +1639,11 @@ msgstr "Барлық файлдар (*)"
 
 #: ../plugins/gtkui/fileman.c:547 ../plugins/gtkui/fileman.c:591
 msgid "Supported playlist formats"
-msgstr ""
+msgstr "Қолдау көрсетілетін ойнату тізімі пішімдері"
 
 #: ../plugins/gtkui/fileman.c:554
 msgid "All files"
-msgstr ""
+msgstr "Барлық файлдар"
 
 #: ../plugins/gtkui/fileman.c:597
 msgid "Other files (*)"
@@ -1673,23 +1669,23 @@ msgstr "%d күн %d:%02d:%02d"
 
 #: ../plugins/gtkui/gtkui.c:224
 msgid "total playtime"
-msgstr ""
+msgstr "жалпы ойнату уақыты"
 
 #: ../plugins/gtkui/gtkui.c:432 ../plugins/gtkui/gtkui.c:443
 msgid "Paused"
-msgstr ""
+msgstr "Аялдатылған"
 
 #: ../plugins/gtkui/gtkui.c:433 ../plugins/gtkui/gtkui.c:443
 msgid "bit"
-msgstr ""
+msgstr "бит"
 
 #: ../plugins/gtkui/gtkui.c:434 ../plugins/gtkui/gtkui.c:440
 msgid "selection playtime"
-msgstr ""
+msgstr "таңдалғанның ойнату уақыты"
 
 #: ../plugins/gtkui/gtkui.c:439 ../plugins/gtkui/gtkui.c:444
 msgid "Stopped"
-msgstr ""
+msgstr "Тоқтатылған"
 
 #: ../plugins/gtkui/gtkui.c:606 ../plugins/gtkui/pltmenu.c:133
 msgid "Rename Playlist"
@@ -1697,12 +1693,12 @@ msgstr "Ойнату тізімінің атын өзгерту"
 
 #: ../plugins/gtkui/gtkui.c:639
 msgid "Removing playlist"
-msgstr ""
+msgstr "Ойнату тізімін өшіру"
 
 #: ../plugins/gtkui/gtkui.c:642
 #, c-format
 msgid "Do you really want to remove the playlist '%s'?"
-msgstr ""
+msgstr "«%s» ойнату тізімін өшіруді шынымен қалайсыз ба?"
 
 #: ../plugins/gtkui/gtkui.c:802 ../plugins/pltbrowser/pltbrowser.c:68
 #, c-format
@@ -1740,7 +1736,7 @@ msgstr "Альбом мұқабасын көрсету"
 
 #: ../plugins/gtkui/gtkui.c:1534
 msgid "Oscilloscope"
-msgstr ""
+msgstr "Осциллограф"
 
 #: ../plugins/gtkui/gtkui.c:1535
 msgid "Spectrum"
@@ -1754,8 +1750,8 @@ msgstr "HBox"
 msgid "VBox"
 msgstr "VBox"
 
-#: ../plugins/gtkui/gtkui.c:1538 ../plugins/gtkui/widgets.c:3829
-#: ../plugins/gtkui/widgets.c:3916
+#: ../plugins/gtkui/gtkui.c:1538 ../plugins/gtkui/widgets.c:3835
+#: ../plugins/gtkui/widgets.c:3922
 msgid "Button"
 msgstr "Батырма"
 
@@ -1777,11 +1773,11 @@ msgstr "Chiptune дыбыстары"
 
 #: ../plugins/gtkui/gtkui.c:1543
 msgid "Log viewer"
-msgstr ""
+msgstr "Журналды қарау құралы"
 
 #: ../plugins/gtkui/gtkui.c:1544
 msgid "Media library viewer"
-msgstr ""
+msgstr "Медиатеканы қарау құралы"
 
 #: ../plugins/gtkui/gtkui.c:1751
 msgid "Failed while reading help file"
@@ -1806,38 +1802,38 @@ msgid ""
 " The files will be moved to trash.\n"
 "\n"
 "(This dialog can be turned off in GTKUI plugin settings)"
-msgstr ""
+msgstr " Файлдар қоқыс шелегіне жылжытылады.\n\n(Бұл сұхбат терезесін GTKUI плагинінің баптауларында сөндіруге болады)"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:47
 msgid ""
 " The files will be lost.\n"
 "\n"
 "(This dialog can be turned off in GTKUI plugin settings)"
-msgstr ""
+msgstr " Файлдар жоғалады.\n\n(Бұл сұхбат терезесін GTKUI плагинінің баптауларында сөндіруге болады)"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:52
 #, c-format
 msgid "Do you really want to delete the selected file?%s"
-msgstr ""
+msgstr "Таңдалған файлды шынымен өшіруді қалайсыз ба?%s"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:54
 #, c-format
 msgid "Do you really want to delete all %d selected files?%s"
-msgstr ""
+msgstr "Барлық %d таңдалған файлды шынымен өшіруді қалайсыз ба?%s"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:59
 #, c-format
 msgid "Do you really want to delete all %d files from the current playlist?%s"
-msgstr ""
+msgstr "Ағымдағы ойнату тізіміндегі барлық %d файлды шынымен өшіруді қалайсыз ба?%s"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:62
 #, c-format
 msgid "Do you really want to delete the currently playing file?%s"
-msgstr ""
+msgstr "Қазір ойнатылып жатқан файлды шынымен өшіруді қалайсыз ба?%s"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:65
 msgid "Delete files from disk"
-msgstr ""
+msgstr "Файлдарды дискіден өшіру"
 
 #: ../plugins/gtkui/gtkui_deletefromdisk.c:68 ../plugins/gtkui/widgets.c:937
 #: ../plugins/shellexecui/shellexecui.c:139
@@ -1858,34 +1854,34 @@ msgstr "Ортасы"
 
 #: ../plugins/gtkui/interface.c:1910
 msgid "Disabled"
-msgstr ""
+msgstr "Сөндірулі"
 
 #: ../plugins/gtkui/interface.c:1911
 msgid "8 bit"
-msgstr ""
+msgstr "8 бит"
 
 #: ../plugins/gtkui/interface.c:1912
 msgid "16 bit"
-msgstr ""
+msgstr "16 бит"
 
 #: ../plugins/gtkui/interface.c:1913
 msgid "24 bit"
-msgstr ""
+msgstr "24 бит"
 
 #: ../plugins/gtkui/interface.c:1914
 msgid "32 bit"
-msgstr ""
+msgstr "32 бит"
 
 #: ../plugins/gtkui/interface.c:2045
 msgid "By playback order"
-msgstr ""
+msgstr "Ойнату реті бойынша"
 
 #: ../plugins/gtkui/interface.c:2046
 msgid "Track"
 msgstr "Трек"
 
 #: ../plugins/gtkui/interface.c:2062 ../plugins/gtkui/playlist/plcommon.c:896
-#: ../plugins/gtkui/widgets.c:3262 ../plugins/gtkui/widgets.c:3924
+#: ../plugins/gtkui/widgets.c:3268 ../plugins/gtkui/widgets.c:3930
 #: ../translation/plugins.c:260
 #, no-c-format
 msgid "None"
@@ -1893,15 +1889,15 @@ msgstr "Ешнәрсе"
 
 #: ../plugins/gtkui/interface.c:2063
 msgid "Apply gain"
-msgstr ""
+msgstr "Күшейтуді қолдану"
 
 #: ../plugins/gtkui/interface.c:2064
 msgid "Apply gain and prevent clipping according to peak"
-msgstr ""
+msgstr "Күшейтуді қолдану және пикке сәйкес клиппингті болдырмау"
 
 #: ../plugins/gtkui/interface.c:2065
 msgid "Only prevent clipping"
-msgstr ""
+msgstr "Тек клиппингті болдырмау"
 
 #: ../plugins/gtkui/interface.c:4329
 msgid "Ascending"
@@ -1921,31 +1917,31 @@ msgstr "2.4"
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:126
 msgid "All Music"
-msgstr ""
+msgstr "Барлық музыка"
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:130
 msgid "Media library is disabled"
-msgstr ""
+msgstr "Медиатека сөндірулі"
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:134
 msgid "Loading..."
-msgstr ""
+msgstr "Жүктелуде..."
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:137
 msgid "Scanning..."
-msgstr ""
+msgstr "Сканерлеуде..."
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:140
 msgid "Indexing..."
-msgstr ""
+msgstr "Индекстеуде..."
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:143
 msgid "Saving..."
-msgstr ""
+msgstr "Сақталуда..."
 
 #: ../plugins/gtkui/medialib/medialibwidget.c:826
 msgid "Media Library plugin is unavailable."
-msgstr ""
+msgstr "Медиатека плагині қолжетімсіз."
 
 #: ../plugins/gtkui/playlist/mainplaylist.c:236
 #: ../plugins/gtkui/playlist/searchplaylist.c:191
@@ -1984,7 +1980,7 @@ msgstr "Әртіс - Альбом"
 
 #: ../plugins/gtkui/playlist/plcommon.c:80
 msgid "Year"
-msgstr ""
+msgstr "Жыл"
 
 #: ../plugins/gtkui/playlist/plcommon.c:82 ../translation/extra.c:8
 msgid "Track Number"
@@ -2000,7 +1996,7 @@ msgstr "Кодек"
 
 #: ../plugins/gtkui/playlist/plcommon.c:85
 msgid "Bitrate"
-msgstr ""
+msgstr "Битрейт"
 
 #: ../plugins/gtkui/playlist/plcommon.c:722
 #: ../plugins/gtkui/playlist/plcommon.c:861
@@ -2030,16 +2026,16 @@ msgstr "Әртіс/Күні/Альбом"
 
 #: ../plugins/gtkui/plmenu.c:492
 msgid "Play Next"
-msgstr ""
+msgstr "Келесіні ойнату"
 
 #: ../plugins/gtkui/plmenu.c:497
 msgid "Play Later"
-msgstr ""
+msgstr "Кейінірек ойнату"
 
 #: ../plugins/gtkui/plmenu.c:502 ../translation/plugins.c:73
 #, no-c-format
 msgid "Remove from Playback Queue"
-msgstr ""
+msgstr "Ойнату кезегінен өшіру"
 
 #: ../plugins/gtkui/plmenu.c:534 ../translation/plugins.c:9
 #, no-c-format
@@ -2048,20 +2044,20 @@ msgstr "Метаақпаратты қайта жүктеу"
 
 #: ../plugins/gtkui/plmenu.c:548
 msgid "Cu_t"
-msgstr ""
+msgstr "Қи_ып алу"
 
 #: ../plugins/gtkui/plmenu.c:564
 msgid "_Copy"
-msgstr ""
+msgstr "Кө_шіру"
 
 #: ../plugins/gtkui/plmenu.c:581
 msgid "_Paste"
-msgstr ""
+msgstr "Кі_рістіру"
 
 #: ../plugins/gtkui/plmenu.c:622 ../translation/plugins.c:308
 #, no-c-format
 msgid "Delete from Disk"
-msgstr ""
+msgstr "Дискіден өшіру"
 
 #: ../plugins/gtkui/pltmenu.c:140
 msgid "Remove Playlist"
@@ -2073,13 +2069,13 @@ msgstr "Жаңа ойнату тізімін қосу"
 
 #: ../plugins/gtkui/pltmenu.c:157
 msgid "Enable Autosort"
-msgstr ""
+msgstr "Автосұрыптауды іске қосу"
 
 #: ../plugins/gtkui/pltmenu.c:158
 msgid ""
 "Re-apply the last sort you chose every time when adding new files to this "
 "playlist"
-msgstr ""
+msgstr "Бұл ойнату тізіміне жаңа файлдарды қосқан сайын соңғы таңдалған сұрыптауды қайта қолдану"
 
 #: ../plugins/gtkui/pluginconf.c:50
 msgid "Open file..."
@@ -2100,7 +2096,7 @@ msgstr "Сақтамай-ақ жалғастыруды қалайсыз ба?"
 
 #: ../plugins/gtkui/prefwin/prefwinmedialib.c:70
 msgid "Select music folders to add"
-msgstr ""
+msgstr "Қосу үшін музыка бумаларын таңдаңыз"
 
 #: ../plugins/gtkui/prefwin/prefwinsound.c:69
 msgid "Default Audio Device"
@@ -2116,7 +2112,7 @@ msgstr "Іске қосылуда..."
 
 #: ../plugins/gtkui/rg.c:281
 msgid "Updating File Tags Progress"
-msgstr ""
+msgstr "Файл тегтерін жаңарту барысы"
 
 #: ../plugins/gtkui/rg.c:309 ../plugins/gtkui/selpropertieswidget.c:330
 #: ../plugins/gtkui/trkproperties.c:462 ../plugins/pltbrowser/pltbrowser.c:854
@@ -2125,64 +2121,64 @@ msgstr "Аты"
 
 #: ../plugins/gtkui/rg.c:311
 msgid "Album Gain"
-msgstr ""
+msgstr "Альбом күшейтілуі"
 
 #: ../plugins/gtkui/rg.c:312
 msgid "Track Gain"
-msgstr ""
+msgstr "Трек күшейтілуі"
 
 #: ../plugins/gtkui/rg.c:313
 msgid "Album Peak"
-msgstr ""
+msgstr "Альбом пигі"
 
 #: ../plugins/gtkui/rg.c:314
 msgid "Track Peak"
-msgstr ""
+msgstr "Трек пигі"
 
 #: ../plugins/gtkui/rg.c:317
 msgid "Success"
-msgstr ""
+msgstr "Сәтті"
 
 #: ../plugins/gtkui/rg.c:318
 msgid "File not found"
-msgstr ""
+msgstr "Файл табылмады"
 
 #: ../plugins/gtkui/rg.c:319
 msgid "Invalid file"
-msgstr ""
+msgstr "Жарамсыз файл"
 
 #: ../plugins/gtkui/scriptable/gtkScriptable.c:33
 #, c-format
 msgid "Edit %s"
-msgstr ""
+msgstr "%s түзету"
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:619
 #, c-format
 msgid "%s (Copy)"
-msgstr ""
+msgstr "%s (Көшірме)"
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:684
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:691
 msgid "Can't do that"
-msgstr ""
+msgstr "Бұны істеу мүмкін емес"
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:685
 msgid "Preset with this name already exists."
-msgstr ""
+msgstr "Бұл атты пресет бұрыннан бар."
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:686
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:693
 msgid "Try a different name."
-msgstr ""
+msgstr "Басқа атты байқап көріңіз."
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditViewController.c:692
 msgid "This name is not allowed."
-msgstr ""
+msgstr "Бұл атқа рұқсат жоқ."
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditWindowController.c:103
 #: ../plugins/gtkui/scriptable/gtkScriptablePropertySheetEditWindowController.c:104
 msgid "Reset"
-msgstr ""
+msgstr "Тастау"
 
 #: ../plugins/gtkui/scriptable/gtkScriptableListEditWindowController.c:108
 #: ../plugins/gtkui/scriptable/gtkScriptablePropertySheetEditWindowController.c:109
@@ -2228,7 +2224,7 @@ msgstr "Кілт"
 
 #: ../plugins/gtkui/trkproperties.c:493
 msgid "[Multiple values]"
-msgstr "[Бірнеше мәндер] "
+msgstr "[Бірнеше мән]"
 
 #: ../plugins/gtkui/trkproperties.c:682
 msgid "Writing tags..."
@@ -2236,11 +2232,11 @@ msgstr "Тегтерді жазу..."
 
 #: ../plugins/gtkui/trkproperties.c:1016
 msgid "Item"
-msgstr ""
+msgstr "Элемент"
 
 #: ../plugins/gtkui/trkproperties.c:1017
 msgid "Field"
-msgstr ""
+msgstr "Өріс"
 
 #: ../plugins/gtkui/trkproperties.c:1230
 msgid "Field name"
@@ -2261,22 +2257,22 @@ msgstr "Ондай атымен өріс бар болып тұр, басқа а
 #: ../plugins/gtkui/undointegration.c:70
 #, c-format
 msgid "Undo %s"
-msgstr ""
+msgstr "%s болдырмау"
 
 #: ../plugins/gtkui/undointegration.c:74 ../translation/plugins.c:390
 #, no-c-format
 msgid "Undo"
-msgstr ""
+msgstr "Болдырмау"
 
 #: ../plugins/gtkui/undointegration.c:77
 #, c-format
 msgid "Redo %s"
-msgstr ""
+msgstr "%s қайталау"
 
 #: ../plugins/gtkui/undointegration.c:81 ../translation/plugins.c:392
 #, no-c-format
 msgid "Redo"
-msgstr ""
+msgstr "Қайталау"
 
 #: ../plugins/gtkui/widgets.c:459
 #, c-format
@@ -2301,7 +2297,7 @@ msgstr "Кірістіру"
 
 #: ../plugins/gtkui/widgets.c:1000
 msgid "Parent"
-msgstr ""
+msgstr "Аталық"
 
 #: ../plugins/gtkui/widgets.c:1117
 msgid "Multiple widgets of this type are not supported"
@@ -2309,51 +2305,51 @@ msgstr "Бұл түрдегі бірнеше виджеттерге қолдау
 
 #: ../plugins/gtkui/widgets.c:1400
 msgid "Proportional Sizing"
-msgstr ""
+msgstr "Пропорционалды өлшемдер"
 
 #: ../plugins/gtkui/widgets.c:1410
 msgid "Lock Top Pane Height"
-msgstr ""
+msgstr "Жоғарғы панель биіктігін құлыптау"
 
 #: ../plugins/gtkui/widgets.c:1413
 msgid "Lock Left Pane Width"
-msgstr ""
+msgstr "Сол жақ панель енін құлыптау"
 
 #: ../plugins/gtkui/widgets.c:1424
 msgid "Lock Bottom Pane Height"
-msgstr ""
+msgstr "Төменгі панель биіктігін құлыптау"
 
 #: ../plugins/gtkui/widgets.c:1427
 msgid "Lock Right Pane Width"
-msgstr ""
+msgstr "Оң жақ панель енін құлыптау"
 
 #: ../plugins/gtkui/widgets.c:1687 ../plugins/gtkui/widgets.c:1797
 msgid "Rename Tab"
-msgstr ""
+msgstr "Бет атын өзгерту"
 
 #: ../plugins/gtkui/widgets.c:1802
 msgid "Remove Tab"
-msgstr ""
+msgstr "Бетті өшіру"
 
 #: ../plugins/gtkui/widgets.c:1807 ../plugins/gtkui/widgets.c:1963
 msgid "Add New Tab"
-msgstr ""
+msgstr "Жаңа бет қосу"
 
 #: ../plugins/gtkui/widgets.c:1814
 msgid "Move Tab Left"
-msgstr ""
+msgstr "Бетті солға жылжыту"
 
 #: ../plugins/gtkui/widgets.c:1819
 msgid "Move Tab Right"
-msgstr ""
+msgstr "Бетті оңға жылжыту"
 
-#: ../plugins/gtkui/widgets.c:2751 ../plugins/gtkui/widgets.c:3239
+#: ../plugins/gtkui/widgets.c:2751 ../plugins/gtkui/widgets.c:3245
 msgid "Rendering Mode"
-msgstr ""
+msgstr "Рендеринг режимі"
 
 #: ../plugins/gtkui/widgets.c:2756
 msgid "Multichannel"
-msgstr ""
+msgstr "Көп арналы"
 
 #: ../plugins/gtkui/widgets.c:2759 ../src/playlist.c:3544
 msgid "Mono"
@@ -2361,181 +2357,181 @@ msgstr "Моно"
 
 #: ../plugins/gtkui/widgets.c:2765
 msgid "Scale"
-msgstr ""
+msgstr "Масштаб"
 
 #: ../plugins/gtkui/widgets.c:2770
 msgid "Auto"
-msgstr ""
+msgstr "Авто"
 
 #: ../plugins/gtkui/widgets.c:2772 ../translation/plugins.c:229
 #, no-c-format
 msgid "1x"
-msgstr ""
+msgstr "1x"
 
 #: ../plugins/gtkui/widgets.c:2774 ../translation/plugins.c:231
 #, no-c-format
 msgid "2x"
-msgstr ""
+msgstr "2x"
 
 #: ../plugins/gtkui/widgets.c:2776
 msgid "3x"
-msgstr ""
+msgstr "3x"
 
 #: ../plugins/gtkui/widgets.c:2778 ../translation/plugins.c:233
 #, no-c-format
 msgid "4x"
-msgstr ""
+msgstr "4x"
 
 #: ../plugins/gtkui/widgets.c:2787
 msgid "Fragment Duration"
-msgstr ""
+msgstr "Фрагмент ұзақтығы"
 
 #: ../plugins/gtkui/widgets.c:2792
 msgid "50 ms"
-msgstr ""
+msgstr "50 мс"
 
 #: ../plugins/gtkui/widgets.c:2794
 msgid "100 ms"
-msgstr ""
+msgstr "100 мс"
 
 #: ../plugins/gtkui/widgets.c:2796
 msgid "200 ms"
-msgstr ""
+msgstr "200 мс"
 
 #: ../plugins/gtkui/widgets.c:2798
 msgid "300 ms"
-msgstr ""
+msgstr "300 мс"
 
 #: ../plugins/gtkui/widgets.c:2800
 msgid "500 ms"
-msgstr ""
-
-#: ../plugins/gtkui/widgets.c:3244
-msgid "Discrete Frequencies"
-msgstr ""
-
-#: ../plugins/gtkui/widgets.c:3247
-msgid "1/12 Octave Bands"
-msgstr ""
+msgstr "500 мс"
 
 #: ../plugins/gtkui/widgets.c:3250
+msgid "Discrete Frequencies"
+msgstr "Дискретті жиіліктер"
+
+#: ../plugins/gtkui/widgets.c:3253
+msgid "1/12 Octave Bands"
+msgstr "1/12 октава жолақтары"
+
+#: ../plugins/gtkui/widgets.c:3256
 msgid "1/24 Octave Bands"
-msgstr ""
+msgstr "1/24 октава жолақтары"
 
-#: ../plugins/gtkui/widgets.c:3257
+#: ../plugins/gtkui/widgets.c:3263
 msgid "Gap Size"
-msgstr ""
-
-#: ../plugins/gtkui/widgets.c:3265
-msgid "1/2 Bar"
-msgstr ""
-
-#: ../plugins/gtkui/widgets.c:3268
-msgid "1/3 Bar"
-msgstr ""
+msgstr "Аралық өлшемі"
 
 #: ../plugins/gtkui/widgets.c:3271
-msgid "1/4 Bar"
-msgstr ""
+msgid "1/2 Bar"
+msgstr "1/2 баған"
 
 #: ../plugins/gtkui/widgets.c:3274
-msgid "1/5 Bar"
-msgstr ""
+msgid "1/3 Bar"
+msgstr "1/3 баған"
 
 #: ../plugins/gtkui/widgets.c:3277
-msgid "1/6 Bar"
-msgstr ""
+msgid "1/4 Bar"
+msgstr "1/4 баған"
 
 #: ../plugins/gtkui/widgets.c:3280
-msgid "1/7 Bar"
-msgstr ""
+msgid "1/5 Bar"
+msgstr "1/5 баған"
 
 #: ../plugins/gtkui/widgets.c:3283
-msgid "1/8 Bar"
-msgstr ""
+msgid "1/6 Bar"
+msgstr "1/6 баған"
 
 #: ../plugins/gtkui/widgets.c:3286
-msgid "1/9 Bar"
-msgstr ""
+msgid "1/7 Bar"
+msgstr "1/7 баған"
 
 #: ../plugins/gtkui/widgets.c:3289
+msgid "1/8 Bar"
+msgstr "1/8 баған"
+
+#: ../plugins/gtkui/widgets.c:3292
+msgid "1/9 Bar"
+msgstr "1/9 баған"
+
+#: ../plugins/gtkui/widgets.c:3295
 msgid "1/10 Bar"
-msgstr ""
+msgstr "1/10 баған"
 
-#: ../plugins/gtkui/widgets.c:3552
+#: ../plugins/gtkui/widgets.c:3558
 msgid "Expand Box by 1 Item"
-msgstr ""
+msgstr "Боксты 1 элементке кеңейту"
 
-#: ../plugins/gtkui/widgets.c:3557
+#: ../plugins/gtkui/widgets.c:3563
 msgid "Shrink Box by 1 Item"
-msgstr ""
+msgstr "Боксты 1 элементке тарылту"
 
-#: ../plugins/gtkui/widgets.c:3562
+#: ../plugins/gtkui/widgets.c:3568
 msgid "Homogeneous"
 msgstr "Біртектес"
 
-#: ../plugins/gtkui/widgets.c:3602
+#: ../plugins/gtkui/widgets.c:3608
 msgid "Expand"
 msgstr "Жазу"
 
-#: ../plugins/gtkui/widgets.c:3608
+#: ../plugins/gtkui/widgets.c:3614
 msgid "Fill"
 msgstr "Толтыру"
 
-#: ../plugins/gtkui/widgets.c:4003
+#: ../plugins/gtkui/widgets.c:4009
 msgid "Configure Button"
-msgstr ""
+msgstr "Батырманы баптау"
 
-#: ../plugins/gtkui/widgets.c:4261
+#: ../plugins/gtkui/widgets.c:4267
 msgid "_dB Scale"
-msgstr ""
+msgstr "_дБ шкаласы"
 
-#: ../plugins/gtkui/widgets.c:4270
+#: ../plugins/gtkui/widgets.c:4276
 msgid "_Linear Scale"
-msgstr ""
+msgstr "_Сызықтық шкала"
 
-#: ../plugins/gtkui/widgets.c:4279
+#: ../plugins/gtkui/widgets.c:4285
 msgid "_Cubic Scale"
-msgstr ""
+msgstr "_Кубтық шкала"
 
-#: ../plugins/gtkui/widgets.c:4399
+#: ../plugins/gtkui/widgets.c:4405
 msgid "Voices:"
 msgstr "Дыбыстар:"
 
 #: ../plugins/lyrics/lyrics.c:57
 msgid "Lyrics Not Available"
-msgstr ""
+msgstr "Ән мәтіні қолжетімсіз"
 
 #: ../plugins/lyrics/lyrics.c:212
 msgid "Lyrics"
-msgstr ""
+msgstr "Ән мәтіні"
 
 #: ../plugins/pltbrowser/pltbrowser.c:170
 msgid " (paused)"
-msgstr ""
+msgstr " (аялдатылған)"
 
 #: ../plugins/pltbrowser/pltbrowser.c:173
 msgid " (stopped)"
-msgstr ""
+msgstr " (тоқтатылған)"
 
 #: ../plugins/pltbrowser/pltbrowser.c:176
 msgid " (playing)"
-msgstr ""
+msgstr " (ойнатылуда)"
 
 #. NOTE: localizable because of the "d" suffix for days
 #: ../plugins/pltbrowser/pltbrowser.c:217
 #, c-format
 msgid "%dd %d:%02d:%02d"
-msgstr ""
+msgstr "%dк %d:%02d:%02d"
 
 #: ../plugins/pltbrowser/pltbrowser.c:410
 #: ../plugins/pltbrowser/pltbrowser.c:863
 msgid "Items"
-msgstr ""
+msgstr "Элементтер"
 
 #: ../plugins/pltbrowser/pltbrowser.c:857
 msgid "♫"
-msgstr ""
+msgstr "♫"
 
 #: ../plugins/pltbrowser/pltbrowser.c:915
 msgid "Playlist browser"
@@ -2673,17 +2669,17 @@ msgstr "Қате мәндер"
 msgid ""
 "wildmidi: freepats config file not found. Please install timidity-freepats "
 "package, or specify path to freepats.cfg in the plugin settings.\n"
-msgstr ""
+msgstr "wildmidi: freepats конфигурация файлы табылмады. timidity-freepats дестесін орнатыңыз немесе плагин баптауларында freepats.cfg жолын көрсетіңіз.\n"
 
 #: ../src/actionhandlers.c:823
 #, c-format
 msgid "Copy of %s"
-msgstr ""
+msgstr "%s көшірмесі"
 
 #: ../src/actionhandlers.c:826
 #, c-format
 msgid "Copy of %s (%d)"
-msgstr ""
+msgstr "%s көшірмесі (%d)"
 
 #: ../src/main.c:139
 #, c-format
@@ -2759,7 +2755,7 @@ msgstr "   --queue            Файл(дар)ды бар ойнату тізі�
 #: ../src/main.c:153
 #, c-format
 msgid "   --gui PLUGIN       Tells which GUI plugin to use, default is \"GTK3\"\n"
-msgstr ""
+msgstr "   --gui PLUGIN       Қай GUI плагині қолданылатынын айтады, бастапқысы — «GTK3»\n"
 
 #: ../src/main.c:154
 #, c-format
@@ -2779,7 +2775,7 @@ msgstr "                      Пішімі %% синтаксисі: [a]rtist, [t
 msgid ""
 "                      example: --nowplaying \"%%a - %%t\" should print "
 "\"artist - title\"\n"
-msgstr ""
+msgstr "                      мысалы: --nowplaying \"%%a - %%t\" келесідей шығаруы керек: \"орындаушы - атауы\"\n"
 
 #: ../src/main.c:163
 #, c-format
@@ -2789,73 +2785,73 @@ msgstr "                      көбірек білу үшін, %s қараңы�
 #: ../src/main.c:165
 #, c-format
 msgid "                      NOTE: --nowplaying is deprecated.\n"
-msgstr ""
+msgstr "                      ЕСКЕРТПЕ: --nowplaying ескірген.\n"
 
 #: ../src/main.c:168
 #, c-format
 msgid ""
 "   --nowplaying-tf FMT  Print formatted track name to stdout, using the new "
 "title formatting\n"
-msgstr ""
+msgstr "   --nowplaying-tf FMT  Жаңа атау пішімін қолданып, пішімделген трек атын stdout-қа шығару\n"
 
 #: ../src/main.c:171
 #, c-format
 msgid ""
 "                      FMT syntax: http://github.com/DeaDBeeF-"
 "Player/deadbeef/wiki/Title-formatting-2.0\n"
-msgstr ""
+msgstr "                      FMT синтаксисі: http://github.com/DeaDBeeF-Player/deadbeef/wiki/Title-formatting-2.0\n"
 
 #: ../src/main.c:174
 #, c-format
 msgid ""
 "                      example: --nowplaying-tf \"%%artist%% - %%title%%\" "
 "should print \"artist - title\"\n"
-msgstr ""
+msgstr "                      мысалы: --nowplaying-tf \"%%artist%% - %%title%%\" келесідей шығаруы керек: \"орындаушы - атауы\"\n"
 
 #: ../src/main.c:175
 #, c-format
 msgid "   --volume [NUM]     Print or set deadbeef volume level.\n"
-msgstr ""
+msgstr "   --volume [NUM]     DeaDBeeF дыбыс деңгейін шығару немесе орнату.\n"
 
 #: ../src/main.c:178
 #, c-format
 msgid ""
 "                      The NUM parameter can be specified in percents "
 "(absolute value or increment/decrement)\n"
-msgstr ""
+msgstr "                      NUM параметрі пайызбен көрсетілуі мүмкін (абсолютті мән немесе өсім/кему)\n"
 
 #: ../src/main.c:179
 #, c-format
 msgid "                      or in dB [-50, 0] (if with suffix).\n"
-msgstr ""
+msgstr "                      немесе дБ түрінде [-50, 0] (суффикспен болса).\n"
 
 #: ../src/main.c:180
 #, c-format
 msgid ""
 "                      Examples: --volume 80, --volume +10, --volume -5 or "
 "--volume -20dB\n"
-msgstr ""
+msgstr "                      Мысалдар: --volume 80, --volume +10, --volume -5 немесе --volume -20dB\n"
 
 #: ../src/main.c:183
 #, c-format
 msgid ""
 "   --plugin=[PLUG]    Send commands to a specific plugin. Use PLUG=main to "
 "send commands to deadbeef itself.\n"
-msgstr ""
+msgstr "   --plugin=[PLUG]    Белгілі бір плагинге командалар жіберу. DeaDBeeF-тің өзіне команда жіберу үшін PLUG=main қолданыңыз.\n"
 
 #: ../src/main.c:184
 #, c-format
 msgid ""
 "                      To get plugin specific commands use --plugin=[PLUG] "
 "--help\n"
-msgstr ""
+msgstr "                      Плагинге тән командаларды алу үшін --plugin=[PLUG] --help қолданыңыз\n"
 
 #: ../src/main.c:187
 #, c-format
 msgid ""
 "   --plugin-list      List all available plugins including indication for "
 "plugins that support commands.\n"
-msgstr ""
+msgstr "   --plugin-list      Қолжетімді барлық плагиндерді, соның ішінде командаларды қолдайтындарын көрсету.\n"
 
 #: ../src/playlist.c:527 ../src/playlist.c:2871
 msgid "Default"
@@ -2875,11 +2871,11 @@ msgstr "Жоқ"
 
 #: ../src/tf.c:2373
 msgid "mono"
-msgstr ""
+msgstr "моно"
 
 #: ../src/tf.c:2376 ../src/tf.c:2380
 msgid "stereo"
-msgstr ""
+msgstr "стерео"
 
 #: ../translation/extra.c:3
 msgid "Track Title"
@@ -2907,7 +2903,7 @@ msgstr "Диск нөмірі"
 
 #: ../translation/extra.c:13
 msgid "Total Discs"
-msgstr ""
+msgstr "Дискілердің жалпы саны"
 
 #: ../translation/extra.c:14
 msgid "Comment"
@@ -2940,345 +2936,345 @@ msgstr "Құрамындағы cue файлы"
 #: ../translation/plugins.c:5
 #, no-c-format
 msgid "Previous or Restart Current Track"
-msgstr ""
+msgstr "Алдыңғы немесе ағымдағы тректі қайта бастау"
 
 #: ../translation/plugins.c:7
 #, no-c-format
 msgid "Duplicate Playlist"
-msgstr ""
+msgstr "Ойнату тізімін дубликаттау"
 
 #: ../translation/plugins.c:11
 #, no-c-format
 msgid "Jump to Currently Playing Track"
-msgstr ""
+msgstr "Қазір ойнатылып жатқан трекке өту"
 
 #: ../translation/plugins.c:13
 #, no-c-format
 msgid "Skip to"
-msgstr ""
+msgstr "Өту:"
 
 #: ../translation/plugins.c:15
 #, no-c-format
 msgid "Previous Genre"
-msgstr ""
+msgstr "Алдыңғы жанр"
 
 #: ../translation/plugins.c:17
 #, no-c-format
 msgid "Previous Composer"
-msgstr ""
+msgstr "Алдыңғы композитор"
 
 #: ../translation/plugins.c:19
 #, no-c-format
 msgid "Previous Artist"
-msgstr ""
+msgstr "Алдыңғы орындаушы"
 
 #: ../translation/plugins.c:21
 #, no-c-format
 msgid "Previous Album"
-msgstr ""
+msgstr "Алдыңғы альбом"
 
 #: ../translation/plugins.c:23
 #, no-c-format
 msgid "Next Genre"
-msgstr ""
+msgstr "Келесі жанр"
 
 #: ../translation/plugins.c:25
 #, no-c-format
 msgid "Next Composer"
-msgstr ""
+msgstr "Келесі композитор"
 
 #: ../translation/plugins.c:27
 #, no-c-format
 msgid "Next Artist"
-msgstr ""
+msgstr "Келесі орындаушы"
 
 #: ../translation/plugins.c:29
 #, no-c-format
 msgid "Next Album"
-msgstr ""
+msgstr "Келесі альбом"
 
 #: ../translation/plugins.c:31
 #, no-c-format
 msgid "Next Playlist"
-msgstr ""
+msgstr "Келесі ойнату тізімі"
 
 #: ../translation/plugins.c:33
 #, no-c-format
 msgid "Previous Playlist"
-msgstr ""
+msgstr "Алдыңғы ойнату тізімі"
 
 #: ../translation/plugins.c:35
 #, no-c-format
 msgid "Switch to Playlist 10"
-msgstr ""
+msgstr "10-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:37
 #, no-c-format
 msgid "Switch to Playlist 9"
-msgstr ""
+msgstr "9-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:39
 #, no-c-format
 msgid "Switch to Playlist 8"
-msgstr ""
+msgstr "8-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:41
 #, no-c-format
 msgid "Switch to Playlist 7"
-msgstr ""
+msgstr "7-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:43
 #, no-c-format
 msgid "Switch to Playlist 6"
-msgstr ""
+msgstr "6-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:45
 #, no-c-format
 msgid "Switch to Playlist 5"
-msgstr ""
+msgstr "5-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:47
 #, no-c-format
 msgid "Switch to Playlist 4"
-msgstr ""
+msgstr "4-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:49
 #, no-c-format
 msgid "Switch to Playlist 3"
-msgstr ""
+msgstr "3-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:51
 #, no-c-format
 msgid "Switch to Playlist 2"
-msgstr ""
+msgstr "2-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:53
 #, no-c-format
 msgid "Switch to Playlist 1"
-msgstr ""
+msgstr "1-ойнату тізіміне ауысу"
 
 #: ../translation/plugins.c:57
 #, no-c-format
 msgid "Sort Randomize"
-msgstr ""
+msgstr "Кездейсоқ сұрыптау"
 
 #: ../translation/plugins.c:59
 #, no-c-format
 msgid "Sort by Date"
-msgstr ""
+msgstr "Күн бойынша сұрыптау"
 
 #: ../translation/plugins.c:61
 #, no-c-format
 msgid "Sort by Artist"
-msgstr ""
+msgstr "Орындаушы бойынша сұрыптау"
 
 #: ../translation/plugins.c:63
 #, no-c-format
 msgid "Sort by Album"
-msgstr ""
+msgstr "Альбом бойынша сұрыптау"
 
 #: ../translation/plugins.c:65
 #, no-c-format
 msgid "Sort by Track Number"
-msgstr ""
+msgstr "Трек нөмірі бойынша сұрыптау"
 
 #: ../translation/plugins.c:67
 #, no-c-format
 msgid "Sort by Title"
-msgstr ""
+msgstr "Атауы бойынша сұрыптау"
 
 #: ../translation/plugins.c:69
 #, no-c-format
 msgid "Invert Selection"
-msgstr ""
+msgstr "Таңдауды инверсиялау"
 
 #: ../translation/plugins.c:71
 #, no-c-format
 msgid "Clear Playlist"
-msgstr ""
+msgstr "Ойнату тізімін тазарту"
 
 #: ../translation/plugins.c:75
 #, no-c-format
 msgid "Add to Playback Queue"
-msgstr ""
+msgstr "Ойнату кезегіне қосу"
 
 #: ../translation/plugins.c:77
 #, no-c-format
 msgid "Add to Front of Playback Queue"
-msgstr ""
+msgstr "Ойнату кезегінің басына қосу"
 
 #: ../translation/plugins.c:79
 #, no-c-format
 msgid "Toggle in Playback Queue"
-msgstr ""
+msgstr "Ойнату кезегінде ауыстыру"
 
 #: ../translation/plugins.c:81
 #, no-c-format
 msgid "Move"
-msgstr ""
+msgstr "Жылжыту"
 
 #: ../translation/plugins.c:83
 #, no-c-format
 msgid "Move Tracks Down"
-msgstr ""
+msgstr "Тректерді төмен жылжыту"
 
 #: ../translation/plugins.c:85
 #, no-c-format
 msgid "Move Tracks Up"
-msgstr ""
+msgstr "Тректерді жоғары жылжыту"
 
 #: ../translation/plugins.c:87
 #, no-c-format
 msgid "Toggle Mute"
-msgstr ""
+msgstr "Дыбысты басу/қосу"
 
 #: ../translation/plugins.c:97
 #, no-c-format
 msgid "Toggle Pause"
-msgstr ""
+msgstr "Аялдатуды ауыстыру"
 
 #: ../translation/plugins.c:99
 #, no-c-format
 msgid "Play\\/Pause"
-msgstr ""
+msgstr "Ойнату\\/Аялдату"
 
 #: ../translation/plugins.c:101
 #, no-c-format
 msgid "Play Next Album"
-msgstr ""
+msgstr "Келесі альбомды ойнату"
 
 #: ../translation/plugins.c:103
 #, no-c-format
 msgid "Play Previous Album"
-msgstr ""
+msgstr "Алдыңғы альбомды ойнату"
 
 #: ../translation/plugins.c:105
 #, no-c-format
 msgid "Play Random Album"
-msgstr ""
+msgstr "Кездейсоқ альбомды ойнату"
 
 #: ../translation/plugins.c:109
 #, no-c-format
 msgid "Seek 1s Forward"
-msgstr ""
+msgstr "1 сек алға өткізу"
 
 #: ../translation/plugins.c:111
 #, no-c-format
 msgid "Seek 1s Backward"
-msgstr ""
+msgstr "1 сек артқа өткізу"
 
 #: ../translation/plugins.c:113
 #, no-c-format
 msgid "Seek 5s Forward"
-msgstr ""
+msgstr "5 сек алға өткізу"
 
 #: ../translation/plugins.c:115
 #, no-c-format
 msgid "Seek 5s Backward"
-msgstr ""
+msgstr "5 сек артқа өткізу"
 
 #: ../translation/plugins.c:117
 #, no-c-format
 msgid "Seek 1% Forward"
-msgstr ""
+msgstr "1% алға өткізу"
 
 #: ../translation/plugins.c:119
 #, no-c-format
 msgid "Seek 1% Backward"
-msgstr ""
+msgstr "1% артқа өткізу"
 
 #: ../translation/plugins.c:121
 #, no-c-format
 msgid "Seek 5% Forward"
-msgstr ""
+msgstr "5% алға өткізу"
 
 #: ../translation/plugins.c:123
 #, no-c-format
 msgid "Seek 5% Backward"
-msgstr ""
+msgstr "5% артқа өткізу"
 
 #: ../translation/plugins.c:125
 #, no-c-format
 msgid "Volume Up"
-msgstr ""
+msgstr "Дыбысты көтеру"
 
 #: ../translation/plugins.c:127
 #, no-c-format
 msgid "Volume Down"
-msgstr ""
+msgstr "Дыбысты түсіру"
 
 #: ../translation/plugins.c:129
 #, no-c-format
 msgid "Toggle Stop After Current Track"
-msgstr ""
+msgstr "Ағымдағы тректен кейін тоқтатуды ауыстыру"
 
 #: ../translation/plugins.c:131
 #, no-c-format
 msgid "Toggle Stop After Current Album"
-msgstr ""
+msgstr "Ағымдағы альбомнан кейін тоқтатуды ауыстыру"
 
 #. external/ddb_output_pw/pw.c
 #: ../translation/plugins.c:134
 #, no-c-format
 msgid "PipeWire remote daemon name (empty for default)"
-msgstr ""
+msgstr "PipeWire қашықтағы қызметінің аты (бастапқы мән үшін бос қалдырыңыз)"
 
 #: ../translation/plugins.c:136
 #, no-c-format
 msgid "Custom properties (overrides existing ones):"
-msgstr ""
+msgstr "Жеке қасиеттер (бар мәндерді қайта анықтайды):"
 
 #: ../translation/plugins.c:138
 #, no-c-format
 msgid "Use PipeWire volume control"
-msgstr ""
+msgstr "PipeWire дыбыс деңгейін басқаруды қолдану"
 
 #: ../translation/plugins.c:140
 #, no-c-format
 msgid "Buffer length (ms)"
-msgstr ""
+msgstr "Буфер ұзындығы (мс)"
 
 #. plugins/aac/aac.c
 #: ../translation/plugins.c:143
 #, no-c-format
 msgid "Ignore corrupt frames"
-msgstr ""
+msgstr "Бұзылған фреймдерді елемеу"
 
 #. plugins/adplug/plugin.c
 #: ../translation/plugins.c:146
 #, no-c-format
 msgid "Sample rate (real OPL is 49716Hz)"
-msgstr ""
+msgstr "Дискреттеу жиілігі (нағыз OPL жиілігі — 49716 Гц)"
 
 #: ../translation/plugins.c:148
 #, no-c-format
 msgid "Synth engine"
-msgstr ""
+msgstr "Синтездеу қозғалтқышы"
 
 #: ../translation/plugins.c:150
 #, no-c-format
 msgid "Nuked OPL3"
-msgstr ""
+msgstr "Nuked OPL3"
 
 #: ../translation/plugins.c:152
 #, no-c-format
 msgid "DOSBox OPL3 emulator"
-msgstr ""
+msgstr "DOSBox OPL3 эмуляторы"
 
 #: ../translation/plugins.c:154
 #, no-c-format
 msgid "Tatsuyuki Satoh's OPL2 emulator"
-msgstr ""
+msgstr "Tatsuyuki Satoh жасаған OPL2 эмуляторы"
 
 #: ../translation/plugins.c:156
 #, no-c-format
 msgid "Ken Silverman's OPL emulator"
-msgstr ""
+msgstr "Ken Silverman жасаған OPL эмуляторы"
 
 #: ../translation/plugins.c:158
 #, no-c-format
 msgid "Simon Peter's OPL emulator"
-msgstr ""
+msgstr "Simon Peter жасаған OPL эмуляторы"
 
 #. plugins/alsa/alsa.c
 #: ../translation/plugins.c:161
@@ -3300,7 +3296,7 @@ msgstr "Таңдамалы период өлшемі"
 #: ../translation/plugins.c:168
 #, no-c-format
 msgid "Refresh Cover Art"
-msgstr ""
+msgstr "Мұқаба суретін жаңарту"
 
 #: ../translation/plugins.c:170
 #, no-c-format
@@ -3315,98 +3311,98 @@ msgstr "Жергілікті бумадан алу"
 #: ../translation/plugins.c:174
 #, no-c-format
 msgid "Fetch from Last.fm"
-msgstr ""
+msgstr "Last.fm сайтынан алу"
 
 #: ../translation/plugins.c:176
 #, no-c-format
 msgid "Fetch from MusicBrainz"
-msgstr ""
+msgstr "MusicBrainz сайтынан алу"
 
 #: ../translation/plugins.c:178
 #, no-c-format
 msgid "Fetch from Albumart.org"
-msgstr ""
+msgstr "Albumart.org сайтынан алу"
 
 #: ../translation/plugins.c:180
 #, no-c-format
 msgid "Fetch from World of Spectrum (AY files)"
-msgstr ""
+msgstr "World of Spectrum сайтынан алу (AY файлдары)"
 
 #: ../translation/plugins.c:182
 #, no-c-format
 msgid "Save downloaded files to music folders"
-msgstr ""
+msgstr "Жүктелген файлдарды музыка бумаларына сақтау"
 
 #: ../translation/plugins.c:184
 #, no-c-format
 msgid "When no artwork is found"
-msgstr ""
+msgstr "Мұқаба табылмаған кезде"
 
 #: ../translation/plugins.c:186
 #, no-c-format
 msgid "leave blank"
-msgstr ""
+msgstr "бос қалдыру"
 
 #: ../translation/plugins.c:188
 #, no-c-format
 msgid "use DeaDBeeF default cover"
-msgstr ""
+msgstr "DeaDBeeF бастапқы мұқабасын қолдану"
 
 #: ../translation/plugins.c:190
 #, no-c-format
 msgid "display custom image"
-msgstr ""
+msgstr "жеке суретті көрсету"
 
 #: ../translation/plugins.c:192
 #, no-c-format
 msgid "Custom image path"
-msgstr ""
+msgstr "Жеке сурет жолы"
 
 #: ../translation/plugins.c:194
 #, no-c-format
 msgid "Save to file name"
-msgstr ""
+msgstr "Файл атына сақтау"
 
 #: ../translation/plugins.c:196
 #, no-c-format
 msgid "Search masks (; separated)"
-msgstr ""
+msgstr "Іздеу маскалары (; ажыратқышымен)"
 
 #: ../translation/plugins.c:198
 #, no-c-format
 msgid "Search folders (; separated)"
-msgstr ""
+msgstr "Іздеу бумалары (; ажыратқышымен)"
 
 #: ../translation/plugins.c:200
 #, no-c-format
 msgid "Cache refresh (hrs)"
-msgstr ""
+msgstr "Кэшті жаңарту (сағат)"
 
 #: ../translation/plugins.c:202
 #, no-c-format
 msgid "Simplified cache file names"
-msgstr ""
+msgstr "Жеңілдетілген кэш файлдарының аттары"
 
 #: ../translation/plugins.c:204
 #, no-c-format
 msgid "Image size"
-msgstr ""
+msgstr "Сурет өлшемі"
 
 #. plugins/cdda/cdda.c
 #: ../translation/plugins.c:207
 #, no-c-format
 msgid "CD drive to load"
-msgstr ""
+msgstr "Жүктелетін CD дискіенгізгіші"
 
 #: ../translation/plugins.c:209
 #, no-c-format
 msgid "Audio CD Drive"
-msgstr ""
+msgstr "Аудио CD дискіенгізгіші"
 
 #: ../translation/plugins.c:211
 #, no-c-format
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: ../translation/plugins.c:213
 #, no-c-format
@@ -3416,7 +3412,7 @@ msgstr "Аудио CD қосу"
 #: ../translation/plugins.c:215
 #, no-c-format
 msgid "Use CDDB/GnuDb"
-msgstr ""
+msgstr "CDDB/GnuDb қолдану"
 
 #: ../translation/plugins.c:217
 #, no-c-format
@@ -3426,17 +3422,17 @@ msgstr "CDDB алдында CD-Text таңдау"
 #: ../translation/plugins.c:219
 #, no-c-format
 msgid "CDDB url (e.g. 'gnudb.gnudb.org')"
-msgstr ""
+msgstr "CDDB url (мысалы, 'gnudb.gnudb.org')"
 
 #: ../translation/plugins.c:221
 #, no-c-format
 msgid "CDDB port number (e.g. '8880')"
-msgstr ""
+msgstr "CDDB порт нөмірі (мысалы, '8880')"
 
 #: ../translation/plugins.c:223
 #, no-c-format
 msgid "Use CDDB protocol"
-msgstr ""
+msgstr "CDDB протоколын қолдану"
 
 #: ../translation/plugins.c:225
 #, no-c-format
@@ -3446,27 +3442,27 @@ msgstr "NRG бейнелер қолдауын іске қосу"
 #: ../translation/plugins.c:227
 #, no-c-format
 msgid "Drive speed for normal playback"
-msgstr ""
+msgstr "Қалыпты ойнату үшін дискіенгізгіш жылдамдығы"
 
 #: ../translation/plugins.c:235
 #, no-c-format
 msgid "8x"
-msgstr ""
+msgstr "8x"
 
 #: ../translation/plugins.c:237
 #, no-c-format
 msgid "16x"
-msgstr ""
+msgstr "16x"
 
 #: ../translation/plugins.c:239
 #, no-c-format
 msgid "Max"
-msgstr ""
+msgstr "Макс"
 
 #: ../translation/plugins.c:241
 #, no-c-format
 msgid "Use cdparanoia error correction when ripping"
-msgstr ""
+msgstr "Рипинг кезінде cdparanoia қателерді түзетуін қолдану"
 
 #. plugins/converter/convgui.c
 #: ../translation/plugins.c:244
@@ -3478,12 +3474,12 @@ msgstr "Түрлендіру"
 #: ../translation/plugins.c:247
 #, no-c-format
 msgid "Autodetect samplerate from output device"
-msgstr ""
+msgstr "Шығыс құрылғысынан дискреттеу жиілігін автоматты түрде анықтау"
 
 #: ../translation/plugins.c:249
 #, no-c-format
 msgid "Set samplerate directly"
-msgstr ""
+msgstr "Дискреттеу жиілігін тікелей орнату"
 
 #: ../translation/plugins.c:251
 #, no-c-format
@@ -3494,38 +3490,38 @@ msgstr "Сапасы / Алгоритмі"
 #: ../translation/plugins.c:254
 #, no-c-format
 msgid "Resampling quality"
-msgstr ""
+msgstr "Қайта дискреттеу сапасы"
 
 #: ../translation/plugins.c:256
 #, no-c-format
 msgid "Internal DUMB volume"
-msgstr ""
+msgstr "Ішкі DUMB дыбыс деңгейі"
 
 #: ../translation/plugins.c:258
 #, no-c-format
 msgid "Volume ramping"
-msgstr ""
+msgstr "Дыбыс деңгейінің бірқалыпты өзгеруі"
 
 #: ../translation/plugins.c:262
 #, no-c-format
 msgid "On/Off Only"
-msgstr ""
+msgstr "Тек қосу/сөндіру"
 
 #: ../translation/plugins.c:264
 #, no-c-format
 msgid "Full"
-msgstr ""
+msgstr "Толық"
 
 #: ../translation/plugins.c:266
 #, no-c-format
 msgid "8-bit output"
-msgstr ""
+msgstr "8-биттік шығыс"
 
 #. plugins/ffmpeg/ffmpeg.c
 #: ../translation/plugins.c:269
 #, no-c-format
 msgid "Use all extensions supported by ffmpeg"
-msgstr ""
+msgstr "ffmpeg қолдайтын барлық кеңейтулерді қолдану"
 
 #: ../translation/plugins.c:271
 #, no-c-format
@@ -3535,18 +3531,18 @@ msgstr "Файл кеңейтулері (';' ажыратылады)"
 #: ../translation/plugins.c:273
 #, no-c-format
 msgid "Enable DoP output"
-msgstr ""
+msgstr "DoP шығысын іске қосу"
 
 #. plugins/flac/flac.c
 #: ../translation/plugins.c:276
 #, no-c-format
 msgid "Ignore bad header errors"
-msgstr ""
+msgstr "Қате тақырыптама қателерін елемеу"
 
 #: ../translation/plugins.c:278
 #, no-c-format
 msgid "Ignore unparsable stream errors"
-msgstr ""
+msgstr "Талдауға келмейтін ағын қателерін елемеу"
 
 #. plugins/gme/cgme.c
 #: ../translation/plugins.c:281
@@ -3567,218 +3563,218 @@ msgstr "Циклдерді ойнату рет саны (қолжетерлік 
 #: ../translation/plugins.c:287
 #, no-c-format
 msgid "ColecoVision BIOS (for SGC file format)"
-msgstr ""
+msgstr "ColecoVision BIOS (SGC файл пішімі үшін)"
 
 #. plugins/gtkui/gtkui.c
 #: ../translation/plugins.c:290
 #, no-c-format
 msgid "ReplayGain"
-msgstr ""
+msgstr "ReplayGain"
 
 #: ../translation/plugins.c:292
 #, no-c-format
 msgid "Remove ReplayGain Information"
-msgstr ""
+msgstr "ReplayGain ақпаратын өшіру"
 
 #: ../translation/plugins.c:294
 #, no-c-format
 msgid "Scan Selection As Albums (By Tags)"
-msgstr ""
+msgstr "Таңдалғанды альбом ретінде сканерлеу (тегтер бойынша)"
 
 #: ../translation/plugins.c:296
 #, no-c-format
 msgid "Scan Selection As Single Album"
-msgstr ""
+msgstr "Таңдалғанды бір альбом ретінде сканерлеу"
 
 #: ../translation/plugins.c:298
 #, no-c-format
 msgid "Scan Per-file Track Gain"
-msgstr ""
+msgstr "Әр файлдың трек күшейтілуін сканерлеу"
 
 #: ../translation/plugins.c:300
 #, no-c-format
 msgid "Scan Per-file Track Gain If Not Scanned"
-msgstr ""
+msgstr "Егер сканерленбеген болса, әр файлдың трек күшейтілуін сканерлеу"
 
 #: ../translation/plugins.c:302
 #, no-c-format
 msgid "Deselect All"
-msgstr ""
+msgstr "Барлығынан таңдауды алып тастау"
 
 #: ../translation/plugins.c:304
 #, no-c-format
 msgid "Select All"
-msgstr ""
+msgstr "Барлығын таңдау"
 
 #: ../translation/plugins.c:312
 #, no-c-format
 msgid "Add Folder(s)"
-msgstr ""
+msgstr "Буманы(ларды) қосу"
 
 #: ../translation/plugins.c:314
 #, no-c-format
 msgid "Add File(s)"
-msgstr ""
+msgstr "Файлды(ларды) қосу"
 
 #: ../translation/plugins.c:316
 #, no-c-format
 msgid "Open File(s)"
-msgstr ""
+msgstr "Файлды(ларды) ашу"
 
 #: ../translation/plugins.c:322
 #, no-c-format
 msgid "Show Help Page"
-msgstr ""
+msgstr "Көмек бетін көрсету"
 
 #: ../translation/plugins.c:324
 #, no-c-format
 msgid "Cycle Repeat Mode"
-msgstr ""
+msgstr "Қайталау режимін ауыстыру"
 
 #: ../translation/plugins.c:326
 #, no-c-format
 msgid "Repeat - Off"
-msgstr ""
+msgstr "Қайталау - Сөндірулі"
 
 #: ../translation/plugins.c:328
 #, no-c-format
 msgid "Repeat - Single Track"
-msgstr ""
+msgstr "Қайталау - Бір трек"
 
 #: ../translation/plugins.c:330
 #, no-c-format
 msgid "Repeat - All"
-msgstr ""
+msgstr "Қайталау - Барлығы"
 
 #: ../translation/plugins.c:332
 #, no-c-format
 msgid "Cycle Shuffle Mode"
-msgstr ""
+msgstr "Араластыру режимін ауыстыру"
 
 #: ../translation/plugins.c:334
 #, no-c-format
 msgid "Shuffle - Random Tracks"
-msgstr ""
+msgstr "Араластыру - Кездейсоқ тректер"
 
 #: ../translation/plugins.c:336
 #, no-c-format
 msgid "Shuffle - Albums"
-msgstr ""
+msgstr "Араластыру - Альбомдар"
 
 #: ../translation/plugins.c:338
 #, no-c-format
 msgid "Shuffle - Tracks"
-msgstr ""
+msgstr "Араластыру - Тректер"
 
 #: ../translation/plugins.c:340
 #, no-c-format
 msgid "Shuffle - Off"
-msgstr ""
+msgstr "Араластыру - Сөндірулі"
 
 #: ../translation/plugins.c:342
 #, no-c-format
 msgid "Toggle Cursor Follows Playback"
-msgstr ""
+msgstr "«Курсор ойнату соңынан ереді» ауыстыру"
 
 #: ../translation/plugins.c:344
 #, no-c-format
 msgid "Toggle Scroll Follows Playback"
-msgstr ""
+msgstr "«Айналдыру ойнату соңынан ереді» ауыстыру"
 
 #: ../translation/plugins.c:346
 #, no-c-format
 msgid "View"
-msgstr ""
+msgstr "Көрініс"
 
 #: ../translation/plugins.c:348
 #, no-c-format
 msgid "Show\\/Hide menu"
-msgstr ""
+msgstr "Мәзірді көрсету\\/жасыру"
 
 #: ../translation/plugins.c:350
 #, no-c-format
 msgid "Show\\/Hide statusbar"
-msgstr ""
+msgstr "Қалып-күй жолағын көрсету\\/жасыру"
 
 #: ../translation/plugins.c:352
 #, no-c-format
 msgid "Toggle Design Mode"
-msgstr ""
+msgstr "Конструктор режимін ауыстыру"
 
 #: ../translation/plugins.c:356
 #, no-c-format
 msgid "DSP Preferences"
-msgstr ""
+msgstr "DSP баптаулары"
 
 #: ../translation/plugins.c:358
 #, no-c-format
 msgid "Sort Custom"
-msgstr ""
+msgstr "Жеке сұрыптау"
 
 #: ../translation/plugins.c:360
 #, no-c-format
 msgid "Crop Selected"
-msgstr ""
+msgstr "Таңдалғандардан басқасын өшіру"
 
 #: ../translation/plugins.c:362
 #, no-c-format
 msgid "Remove Track(s) from Playlist"
-msgstr ""
+msgstr "Ойнату тізімінен тректі(лерді) өшіру"
 
 #: ../translation/plugins.c:364
 #, no-c-format
 msgid "Save Playlist"
-msgstr ""
+msgstr "Ойнату тізімін сақтау"
 
 #: ../translation/plugins.c:368
 #, no-c-format
 msgid "Remove Current Playlist"
-msgstr ""
+msgstr "Ағымдағы ойнату тізімін өшіру"
 
 #: ../translation/plugins.c:372
 #, no-c-format
 msgid "Rename Current Playlist"
-msgstr ""
+msgstr "Ағымдағы ойнату тізімінің атын өзгерту"
 
 #: ../translation/plugins.c:374
 #, no-c-format
 msgid "Show\\/Hide Equalizer"
-msgstr ""
+msgstr "Эквалайзерді көрсету\\/жасыру"
 
 #: ../translation/plugins.c:376
 #, no-c-format
 msgid "Hide Equalizer"
-msgstr ""
+msgstr "Эквалайзерді жасыру"
 
 #: ../translation/plugins.c:378
 #, no-c-format
 msgid "Show Equalizer"
-msgstr ""
+msgstr "Эквалайзерді көрсету"
 
 #: ../translation/plugins.c:380
 #, no-c-format
 msgid "Show\\/Hide Player Window"
-msgstr ""
+msgstr "Плеер терезесін көрсету\\/жасыру"
 
 #: ../translation/plugins.c:382
 #, no-c-format
 msgid "Hide Player Window"
-msgstr ""
+msgstr "Плеер терезесін жасыру"
 
 #: ../translation/plugins.c:384
 #, no-c-format
 msgid "Show Player Window"
-msgstr ""
+msgstr "Плеер терезесін көрсету"
 
 #: ../translation/plugins.c:386
 #, no-c-format
 msgid "Find"
-msgstr ""
+msgstr "Табу"
 
 #: ../translation/plugins.c:388
 #, no-c-format
 msgid "Show\\/Hide Log window"
-msgstr ""
+msgstr "Журнал терезесін көрсету\\/жасыру"
 
 #: ../translation/plugins.c:394
 #, no-c-format
@@ -3788,7 +3784,7 @@ msgstr "Файлдарды дисктен өшіру алдында растау
 #: ../translation/plugins.c:396
 #, no-c-format
 msgid "Status icon settings:"
-msgstr ""
+msgstr "Күй таңбашасының баптаулары:"
 
 #: ../translation/plugins.c:398
 #, no-c-format
@@ -3803,7 +3799,7 @@ msgstr "Таңдауыңызша жүйелік сөредегі таңбаша"
 #: ../translation/plugins.c:402
 #, no-c-format
 msgid "Misc:"
-msgstr ""
+msgstr "Әртүрлі:"
 
 #: ../translation/plugins.c:404
 #, no-c-format
@@ -3813,18 +3809,18 @@ msgstr "Контекст мәзірі элементтері арасына аж
 #: ../translation/plugins.c:406
 #, no-c-format
 msgid "Use unicode chars instead of images for track state"
-msgstr ""
+msgstr "Трек күйі үшін суреттер орнына Юникод таңбаларын қолдану"
 
 #: ../translation/plugins.c:408
 #, no-c-format
 msgid "Disable seekbar overlay text"
-msgstr ""
+msgstr "Өткізу жолағының үстіндегі мәтінді сөндіру"
 
 #. plugins/lastfm/lastfm.c
 #: ../translation/plugins.c:411
 #, no-c-format
 msgid "Lookup on Last.fm"
-msgstr ""
+msgstr "Last.fm сайтынан іздеу"
 
 #: ../translation/plugins.c:413
 #, no-c-format
@@ -3859,302 +3855,308 @@ msgstr "Альбом әртісі өрісін әртіс өрісінен ба�
 #: ../translation/plugins.c:425
 #, no-c-format
 msgid "Send MusicBrainz ID"
-msgstr ""
+msgstr "MusicBrainz ID жіберу"
 
 #: ../translation/plugins.c:427
 #, no-c-format
 msgid "Submit tracks shorter than 30 seconds (not recommended)"
-msgstr ""
+msgstr "30 секундтан қысқа тректерді жіберу (ұсынылмайды)"
 
 #: ../translation/plugins.c:429
 #, no-c-format
 msgid "Enable logging"
-msgstr ""
+msgstr "Журналдауды іске қосу"
 
 #. plugins/mono2stereo/mono2stereo.c
 #: ../translation/plugins.c:432
 #, no-c-format
 msgid "Left mix"
-msgstr ""
+msgstr "Сол жақ микс"
 
 #: ../translation/plugins.c:434
 #, no-c-format
 msgid "Right mix"
-msgstr ""
+msgstr "Оң жақ микс"
 
 #. plugins/mp3/mp3.c
 #: ../translation/plugins.c:437
 #, no-c-format
 msgid "Force 16 bit output"
-msgstr ""
+msgstr "16-биттік шығысты мәжбүрлеу"
 
 #: ../translation/plugins.c:439
 #, no-c-format
 msgid "Backend"
+msgstr "Бэкэнд"
+
+#. plugins/mpris/mpris.c
+#: ../translation/plugins.c:442
+#, no-c-format
+msgid "Disable shuffle and repeat"
 msgstr ""
 
-#: ../translation/plugins.c:444
+#: ../translation/plugins.c:447
 #, no-c-format
 msgid "Notification title format"
 msgstr "Хабарлама атауының пішімі"
 
-#: ../translation/plugins.c:446
+#: ../translation/plugins.c:449
 #, no-c-format
 msgid "Notification content format"
 msgstr "Хабарлама құрамасының пішімі"
 
-#: ../translation/plugins.c:448
+#: ../translation/plugins.c:451
 #, no-c-format
 msgid "Show album art"
 msgstr "Альбом суретін көрсету"
 
-#: ../translation/plugins.c:450
+#: ../translation/plugins.c:453
 #, no-c-format
 msgid "Album art size (px)"
 msgstr "Альбом суретінің өлшемі (пикс)"
 
-#: ../translation/plugins.c:452
+#: ../translation/plugins.c:455
 #, no-c-format
 msgid "Don't reuse notifications (KDE quirk)"
-msgstr ""
+msgstr "Хабарландыруларды қайта қолданбау (KDE ерекшелігі)"
 
 #. plugins/oss/oss.c
-#: ../translation/plugins.c:455
+#: ../translation/plugins.c:458
 #, no-c-format
 msgid "Device file"
 msgstr "Құрылғы файлы"
 
-#: ../translation/plugins.c:460
+#: ../translation/plugins.c:463
 #, no-c-format
 msgid "Highlight current playlist"
-msgstr ""
+msgstr "Ағымдағы ойнату тізімін ерекшелеу"
 
-#: ../translation/plugins.c:462
-#, no-c-format
-msgid "Play on double-click"
-msgstr ""
-
-#. plugins/portaudio/portaudio.c
 #: ../translation/plugins.c:465
 #, no-c-format
-msgid "Buffer size (-1 to use optimal value chosen by portaudio)"
-msgstr ""
+msgid "Play on double-click"
+msgstr "Екі рет шерткенде ойнату"
 
-#: ../translation/plugins.c:467
+#. plugins/portaudio/portaudio.c
+#: ../translation/plugins.c:468
+#, no-c-format
+msgid "Buffer size (-1 to use optimal value chosen by portaudio)"
+msgstr "Буфер өлшемі (portaudio таңдаған оңтайлы мәнді қолдану үшін -1)"
+
+#: ../translation/plugins.c:470
 #, no-c-format
 msgid "Device name encoding"
-msgstr ""
+msgstr "Құрылғы атының кодталуы"
 
-#: ../translation/plugins.c:469
+#: ../translation/plugins.c:472
 #, no-c-format
 msgid "ASCII / UTF-8"
-msgstr ""
+msgstr "ASCII / UTF-8"
 
-#: ../translation/plugins.c:471
+#: ../translation/plugins.c:474
 #, no-c-format
 msgid "cp1250"
-msgstr ""
+msgstr "cp1250"
 
-#: ../translation/plugins.c:473
+#: ../translation/plugins.c:476
 #, no-c-format
 msgid "Defined below"
-msgstr ""
+msgstr "Төменде анықталған"
 
-#: ../translation/plugins.c:475
-#, no-c-format
-msgid "Custom device name encoding"
-msgstr ""
-
-#. plugins/pulse/pulse.c
 #: ../translation/plugins.c:478
 #, no-c-format
-msgid "PulseAudio server (leave empty for default)"
-msgstr ""
+msgid "Custom device name encoding"
+msgstr "Құрылғы атының жеке кодталуы"
 
-#. plugins/sc68/in_sc68.c
+#. plugins/pulse/pulse.c
 #: ../translation/plugins.c:481
 #, no-c-format
-msgid "Default song length (in minutes)"
-msgstr ""
+msgid "PulseAudio server (leave empty for default)"
+msgstr "PulseAudio сервері (бастапқы мән үшін бос қалдырыңыз)"
 
-#: ../translation/plugins.c:483
+#. plugins/sc68/in_sc68.c
+#: ../translation/plugins.c:484
+#, no-c-format
+msgid "Default song length (in minutes)"
+msgstr "Әннің бастапқы ұзақтығы (минутпен)"
+
+#: ../translation/plugins.c:486
 #, no-c-format
 msgid "Samplerate"
 msgstr "Дискреттеу жиілігі"
 
-#: ../translation/plugins.c:485
+#: ../translation/plugins.c:488
 #, no-c-format
 msgid "Skip when shorter than (sec)"
-msgstr ""
+msgstr "Егер (сек) қысқа болса, өткізіп жіберу"
 
 #. plugins/shellexecui/shellexecui.c
-#: ../translation/plugins.c:488
+#: ../translation/plugins.c:491
 #, no-c-format
 msgid "Configure Custom Shell Commands"
 msgstr "Таңдауыңызша қоршам командаларын баптау"
 
 #. plugins/shn/shnplugin.c
-#: ../translation/plugins.c:491
+#: ../translation/plugins.c:494
 #, no-c-format
 msgid "Relative seek table path"
 msgstr "Іздеу кестесінің салыстырмалы жолы"
 
-#: ../translation/plugins.c:493
+#: ../translation/plugins.c:496
 #, no-c-format
 msgid "Absolute seek table path"
 msgstr "Іздеу кестесінің абсолюттік жолы"
 
-#: ../translation/plugins.c:495
+#: ../translation/plugins.c:498
 #, no-c-format
 msgid "Swap audio bytes (toggle if all you hear is static)"
 msgstr "Аудио байттар орнын ауыстыру"
 
 #. plugins/sid/plugin.c
-#: ../translation/plugins.c:498
+#: ../translation/plugins.c:501
 #, no-c-format
 msgid "Enable HVSC Songlength DB"
 msgstr "HVSC Songlength DB іске қосу"
 
-#: ../translation/plugins.c:500
+#: ../translation/plugins.c:503
 #, no-c-format
 msgid "Full path to Songlengths.md5/.txt"
-msgstr ""
+msgstr "Songlengths.md5/.txt файлына толық жол"
 
-#: ../translation/plugins.c:502
+#: ../translation/plugins.c:505
 #, no-c-format
 msgid "Bits per sample"
-msgstr ""
+msgstr "Әр сэмплдегі бит саны"
 
-#: ../translation/plugins.c:504
+#: ../translation/plugins.c:507
 #, no-c-format
 msgid "Default song length (sec)"
 msgstr "Тректің үнсіз келісім б/ша  ұзындығы (сек)"
 
-#: ../translation/plugins.c:506
-#, no-c-format
-msgid "Mono synth"
-msgstr ""
-
-#. plugins/supereq/supereq.c
 #: ../translation/plugins.c:509
 #, no-c-format
-msgid "Preamp"
-msgstr ""
+msgid "Mono synth"
+msgstr "Моно синтез"
 
-#: ../translation/plugins.c:511
+#. plugins/supereq/supereq.c
+#: ../translation/plugins.c:512
+#, no-c-format
+msgid "Preamp"
+msgstr "Алдын ала күшейткіш"
+
+#: ../translation/plugins.c:514
 #, no-c-format
 msgid "1.2K"
-msgstr ""
+msgstr "1.2K"
 
-#: ../translation/plugins.c:513
+#: ../translation/plugins.c:516
 #, no-c-format
 msgid "1.8K"
-msgstr ""
+msgstr "1.8K"
 
-#: ../translation/plugins.c:515
+#: ../translation/plugins.c:518
 #, no-c-format
 msgid "2.5K"
-msgstr ""
+msgstr "2.5K"
 
-#: ../translation/plugins.c:517
+#: ../translation/plugins.c:520
 #, no-c-format
 msgid "3.5K"
-msgstr ""
+msgstr "3.5K"
 
-#: ../translation/plugins.c:519
+#: ../translation/plugins.c:522
 #, no-c-format
 msgid "5K"
-msgstr ""
+msgstr "5K"
 
-#: ../translation/plugins.c:521
+#: ../translation/plugins.c:524
 #, no-c-format
 msgid "7K"
-msgstr ""
+msgstr "7K"
 
-#: ../translation/plugins.c:523
+#: ../translation/plugins.c:526
 #, no-c-format
 msgid "10K"
-msgstr ""
+msgstr "10K"
 
-#: ../translation/plugins.c:525
+#: ../translation/plugins.c:528
 #, no-c-format
 msgid "14K"
-msgstr ""
+msgstr "14K"
 
-#: ../translation/plugins.c:527
+#: ../translation/plugins.c:530
 #, no-c-format
 msgid "20K"
-msgstr ""
+msgstr "20K"
 
 #. plugins/wildmidi/wildmidiplug.c
-#: ../translation/plugins.c:530
+#: ../translation/plugins.c:533
 #, no-c-format
 msgid "Timidity++ bank configuration file"
 msgstr "Timidity++ банкінің баптау файлы"
 
 #. shared/scriptable/scriptable_encoder.c
-#: ../translation/plugins.c:533
+#: ../translation/plugins.c:536
 #, no-c-format
 msgid "File extension"
-msgstr ""
+msgstr "Файл кеңейтуі"
 
-#: ../translation/plugins.c:535
+#: ../translation/plugins.c:538
 #, no-c-format
 msgid "Encoder command line"
-msgstr ""
+msgstr "Кодердің командалық жолы"
 
-#: ../translation/plugins.c:537
+#: ../translation/plugins.c:540
 #, no-c-format
 msgid "Data transfer method"
-msgstr ""
+msgstr "Деректерді тасымалдау әдісі"
 
-#: ../translation/plugins.c:539
+#: ../translation/plugins.c:542
 #, no-c-format
 msgid "Pipe (stdin)"
-msgstr ""
+msgstr "Пайп (stdin)"
 
-#: ../translation/plugins.c:541
+#: ../translation/plugins.c:544
 #, no-c-format
 msgid "Temporary file"
-msgstr ""
+msgstr "Уақытша файл"
 
-#: ../translation/plugins.c:543
+#: ../translation/plugins.c:546
 #, no-c-format
 msgid "Source file"
-msgstr ""
+msgstr "Бастапқы файл"
 
-#: ../translation/plugins.c:547
+#: ../translation/plugins.c:550
 #, no-c-format
 msgid "Write ID3v2 tag"
-msgstr ""
+msgstr "ID3v2 тегін жазу"
 
-#: ../translation/plugins.c:549
+#: ../translation/plugins.c:552
 #, no-c-format
 msgid "Write ID3v1 tag"
-msgstr ""
+msgstr "ID3v1 тегін жазу"
 
-#: ../translation/plugins.c:551
+#: ../translation/plugins.c:554
 #, no-c-format
 msgid "Write APEv2 tag"
-msgstr ""
+msgstr "APEv2 тегін жазу"
 
-#: ../translation/plugins.c:553
+#: ../translation/plugins.c:556
 #, no-c-format
 msgid "Write FLAC tag"
-msgstr ""
+msgstr "FLAC тегін жазу"
 
-#: ../translation/plugins.c:555
+#: ../translation/plugins.c:558
 #, no-c-format
 msgid "Write OggVorbis tag"
-msgstr ""
+msgstr "OggVorbis тегін жазу"
 
-#: ../translation/plugins.c:557
-#, no-c-format
-msgid "Write MP4 tag"
-msgstr ""
-
-#. src/coreplugin.c
 #: ../translation/plugins.c:560
 #, no-c-format
+msgid "Write MP4 tag"
+msgstr "MP4 тегін жазу"
+
+#. src/coreplugin.c
+#: ../translation/plugins.c:563
+#, no-c-format
 msgid "Toggle Stop After Queue"
-msgstr ""
+msgstr "«Кезектен кейін тоқтату» ауыстыру"

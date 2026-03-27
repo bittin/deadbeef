@@ -1,6 +1,6 @@
 /*
     DeaDBeeF -- the music player
-    Copyright (C) 2009-2026 Oleksiy Yakovenko and other contributors
+    Copyright (C) 2009-2025 Oleksiy Yakovenko and other contributors
 
     This software is provided 'as-is', without any express or implied
     warranty.  In no event will the authors be held liable for any damages
@@ -21,3 +21,14 @@
     3. This notice may not be removed or altered from any source distribution.
 */
 
+#include <gtest/gtest.h>
+#include "../src/utf8.h"
+
+TEST(UTF8Tests, test_u8_strnbcpy_size_inputWithTrailingGarbage_successful) {
+    const unsigned char input[4] = { '0', '1', 0xbe, 0xbe };
+    char output[8] = { 0, };
+    int len = u8_strnbcpy_size(output, (const char *)input, 2, 2);
+    EXPECT_EQ(len, 2);
+    int cmp = memcmp(input, output, 2);
+    EXPECT_EQ(cmp, 0);
+}
